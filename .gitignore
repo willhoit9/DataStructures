@@ -14,4 +14,26 @@ nb-configuration.xml
 *.jar
 *.war
 *.ear
-*.DS_Store
+
+
+# Windows image file caches #
+Thumbs.db
+ehthumbs.db
+
+# Folder config file #
+Desktop.ini
+
+# Recycle Bin used on file shares #
+$RECYCLE.BIN/
+
+
+#Mac Stuff#
+.DS_Store
+.svn
+ 
+# Thumbnails
+._*
+ 
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
