@@ -75,11 +75,18 @@ public class Set implements StringSet, Cloneable{
         Node current = head;
         while (current.getLink() != null)
         {
-            if (current.data != null && current.data.equalsIgnoreCase(target))
-            {
-                System.out.println("----TARGET DESTROYED");
+            // if the current node's link points to the string we want to delete, true
+            if (current.getData() != null && current.getLink().getData().equalsIgnoreCase(target))
+            {  
+                System.out.println("----TARGET FOUND");
+                System.out.println("TARGET? " + current.getData());
+                
+                // the current node is the one before the one we want to delete
+                // change the link of the current node to the one after the node
+                // we wish to delete
                 current.setLink(current.getLink().getLink());
-                // size--;
+                
+                // size--;  - taken out of service because:
                 // i don't think i should decrement size here because we want
                 // size to be an account of all of the total size of Set
                 // I changed the link to pass over the "removed" node, but it
