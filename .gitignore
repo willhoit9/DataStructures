@@ -1,4 +1,4 @@
-# NetBeans specific 
+# NetBeans specific
 nbproject/private/
 build/
 nbbuild/
@@ -7,34 +7,33 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-# Class Files 
+# Class Files
 *.class
 
-# Package Files 
+# Package Files
 *.jar
 *.war
 *.ear
 
 
-# Windows image file caches 
+# Windows image file caches
 Thumbs.db
 ehthumbs.db
 
-# Folder config file 
+# Folder config file
 Desktop.ini
 
-# Recycle Bin used on file shares 
+# Recycle Bin used on file shares
 $RECYCLE.BIN/
 
 
 #Mac Stuff
 .DS_Store
 .svn
- 
+
 # Thumbnails
 ._*
- 
+
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
-/Program2/nbproject/private/
