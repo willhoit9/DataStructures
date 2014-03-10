@@ -73,10 +73,16 @@ public class Set implements StringSet, Cloneable{
     public void remove(String target) {
         
         Node current = head;
+        
+//        if (current.getLink() == null){
+//            
+//        }
+        
         while (current.getLink() != null)
         {
+            // (current.getData() != null && 
             // if the current node's link points to the string we want to delete, true
-            if (current.getData() != null && current.getLink().getData().equalsIgnoreCase(target))
+            if (current.getLink().getData().equalsIgnoreCase(target))
             {  
                 System.out.println("----TARGET FOUND");
                 System.out.println("TARGET? " + current.getData());
@@ -167,7 +173,10 @@ public class Set implements StringSet, Cloneable{
         
         Set set = new Set();
         System.out.println("\n Inventory?");
-        System.out.println(set.inventory());
+        System.out.println(set.inventory() + " strings stored"); 
+        
+        System.out.println("\n Capacity?");
+        System.out.println(set.getCapacity() + "  is the total size of the Set"); 
         
         System.out.println("\n Is empty?");
         System.out.println(set.is_empty());
@@ -201,7 +210,11 @@ public class Set implements StringSet, Cloneable{
         System.out.println(set.getCapacity() + "  is the total size of the Set"); 
         
         
-        String removeName = "ringo";
+        System.out.println("\n ToString method:");
+        System.out.println(set);
+        
+        
+        String removeName = "fabrizio";
         System.out.println("\n Removing: " + removeName);
         set.remove(removeName);
         
