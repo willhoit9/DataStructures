@@ -69,44 +69,73 @@ public class Set implements StringSet, Cloneable{
         }
     }
 
+//    @Override
+//    public void remove(String target) {
+//        
+//        Node current = head;
+//      
+//        while (current.getLink() != null)
+//        {
+//            // (current.getData() != null && 
+//            // if the current node's link points to the string we want to delete, true
+//            if (current.getLink().getData().equalsIgnoreCase(target))
+//            {  
+//                System.out.println("----TARGET FOUND");
+//                System.out.println("TARGET? " + current.getData());
+//                
+//                // the current node is the one before the one we want to delete
+//                // change the link of the current node to the one after the node
+//                // we wish to delete
+//                current.setLink(current.getLink().getLink());
+//                
+//                // size--;  - taken out of service because:
+//                // i don't think i should decrement size here because we want
+//                // size to be an account of all of the total size of Set
+//                // I changed the link to pass over the "removed" node, but it
+//                // was not really deleted. private int size keeps track of all nodes
+//                // regardless of removal from the links
+//            }           
+//            current = current.getLink();           
+//        }             
+//    }
+
+    
+    
+    
+    
+//    
+//    @Override
+//    public void remove(String target) {
+//        for (Node cursor = head; cursor.getLink() != null; cursor = cursor.getLink()) {
+//            if (cursor.getLink().getData().equalsIgnoreCase(target))
+//            {  
+//                System.out.println("----TARGET FOUND");
+//                System.out.println("TARGET? " + cursor.getData());
+//                
+//                cursor.setLink(cursor.getLink().getLink());
+//            }
+//       
+//        }
+//    }
+
+    
+        // version 2
     @Override
     public void remove(String target) {
-        
-        Node current = head;
-        
-//        if (current.getLink() == null){
-//            
-//        }
-        
-        while (current.getLink() != null)
-        {
-            // (current.getData() != null && 
-            // if the current node's link points to the string we want to delete, true
-            if (current.getLink().getData().equalsIgnoreCase(target))
+        for (Node c1 = head, c2 = head.getLink(); c2 != null; c1 = c1.getLink(), c2 = c2.getLink()) {
+            if (c2.getData().equalsIgnoreCase(target))
             {  
-                System.out.println("----TARGET FOUND");
-                System.out.println("TARGET? " + current.getData());
+                //System.out.println("----TARGET FOUND");
+               // System.out.println("TARGET? " + c1.getData());
                 
-                // the current node is the one before the one we want to delete
-                // change the link of the current node to the one after the node
-                // we wish to delete
-                current.setLink(current.getLink().getLink());
-                
-                // size--;  - taken out of service because:
-                // i don't think i should decrement size here because we want
-                // size to be an account of all of the total size of Set
-                // I changed the link to pass over the "removed" node, but it
-                // was not really deleted. private int size keeps track of all nodes
-                // regardless of removal from the links
+                c1.setLink(c2.getLink());
             }
-            
-            current = current.getLink();
-            
-            
+       
         }
-               
     }
-
+    
+    
+    
     @Override
     public String getRandomItem() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -213,17 +242,24 @@ public class Set implements StringSet, Cloneable{
         System.out.println("\n ToString method:");
         System.out.println(set);
         
-        
+
         String removeName = "fabrizio";
         System.out.println("\n Removing: " + removeName);
         set.remove(removeName);
-        
-        System.out.println("\n printSet() method:");
-        set.printSet();
-        
-        
+                   
         System.out.println("\n ToString method:");
         System.out.println(set);
+        
+        
+        String removeName2 = "nikolai";
+        System.out.println("\n Removing: " + removeName2);
+        set.remove(removeName2);
+                   
+        System.out.println("\n ToString method:");
+        System.out.println(set);
+  
+        
+        
         
         String containsName = "paul";
         System.out.println("\n contains() method: " + containsName + "?");
@@ -302,17 +338,77 @@ public class Set implements StringSet, Cloneable{
 //        
 //        inFile.close();
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//       bonus main testing
+//        
+//        String removeName3 = "john";
+//        System.out.println("\n Removing: " + removeName3);
+//        set.remove(removeName3);
+//                   
+//        System.out.println("\n ToString method:");
+//        System.out.println(set);
+//        
+//        
+//        String removeName4 = "paul";
+//        System.out.println("\n Removing: " + removeName4);
+//        set.remove(removeName4);
+//                   
+//        System.out.println("\n ToString method:");
+//        System.out.println(set);
+//        
+//        String removeName5 = "george";
+//        System.out.println("\n Removing: " + removeName5);
+//        set.remove(removeName5);
+//                   
+//        System.out.println("\n ToString method:");
+//        System.out.println(set);        
+//        
+//        String removeName6 = "ringo";
+//        System.out.println("\n Removing: " + removeName6);
+//        set.remove(removeName6);
+//                   
+//        System.out.println("\n ToString method:");
+//        System.out.println(set);
+//        
+//        
+//        
+//        String removeName7 = "julian";
+//        System.out.println("\n Removing: " + removeName7);
+//        set.remove(removeName7);
+//                   
+//        System.out.println("\n ToString method:");
+//        System.out.println(set);
+//        
+//        String removeName8 = "albert";
+//        System.out.println("\n Removing: " + removeName8);
+//        set.remove(removeName8);
+//                   
+//        System.out.println("\n ToString method:");
+//        System.out.println(set);
+//        
+//        
+//        set.insert("julian");
+//        System.out.println("\n ToString method:");
+//        System.out.println(set);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     } // end main()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
