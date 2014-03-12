@@ -1,14 +1,13 @@
+//Set Class
+//Andrew Willhoit - 3/12/14
+
 package program2;
 
 import java.io.FileInputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
- *
- * @author Andrew
- */
+
 public class Set implements StringSet, Cloneable {
 
     private int size;
@@ -19,24 +18,6 @@ public class Set implements StringSet, Cloneable {
         size = 0;
     }
 
-    public void printSet() {
-        Node current = head;
-        while (current != null) {
-            System.out.println(current.getData());
-            current = current.getLink();
-        }
-    }
-
-    @Override
-    public String toString() {
-        Node current = head.getLink();
-        String output = "";
-        while (current != null) {
-            output += "[" + current.getData() + "]";
-            current = current.getLink();
-        }
-        return output;
-    }
 
     @Override
     public void resize(int larger) {
@@ -62,8 +43,8 @@ public class Set implements StringSet, Cloneable {
     public void remove(String target) {
         for (Node c1 = head, c2 = head.getLink(); c2 != null; c1 = c1.getLink(), c2 = c2.getLink()) {
             if (c2.getData().equalsIgnoreCase(target)) {
-                System.out.println("----TARGET FOUND");
-                System.out.println("----TARGET? " + c2.getData());
+                //System.out.println("----TARGET FOUND");
+                //System.out.println("----TARGET? " + c2.getData());
 
                 c1.setLink(c2.getLink());
                 size--;
@@ -79,7 +60,7 @@ public class Set implements StringSet, Cloneable {
         }
         
         int random = (int) (Math.random() * inventory() +1);
-        System.out.println("----RANDOM # " + random);
+        //System.out.println("----RANDOM # " + random);
 
         Node current = head.getLink();
         for (int i = 1; i < random; i++) {
@@ -93,7 +74,7 @@ public class Set implements StringSet, Cloneable {
 
         String removedString = current.getData();
         remove(removedString);
-            System.out.println("---- INVENTORY: " + inventory() );
+        //System.out.println("---- INVENTORY: " + inventory() );
         return removedString;
     }
     
@@ -143,7 +124,6 @@ public class Set implements StringSet, Cloneable {
         if (head.getLink() == null) {
             return 0;
         }
-
         for (Node cursor = head; cursor != null; cursor = cursor.getLink()) {
             if (cursor.data != null) {
                 answer++;
@@ -154,14 +134,46 @@ public class Set implements StringSet, Cloneable {
 
     @Override 
     public int getCapacity() {
+       // Since using a Link List, getCapacity would return the same as inventory()
+       // I decided to use this method to return the private int variable   'size'
+       // which I have incremented and decremented with adds and removes
        // return inventory();
         return size;
+    }
+    
+    // this prints the Set vertically.
+    // I chose to not demonstrate this in the main method due to its length
+    // toString() displays the Set horizontally and used in main's demo
+    public void printSet() {
+        Node current = head;
+        while (current != null) {
+            System.out.println(current.getData());
+            current = current.getLink();
+        }
+    }
+
+    // toString() displays the Set horizontally 
+    @Override
+    public String toString() {
+        Node current = head.getLink();
+        String output = "";
+        while (current != null) {
+            output += "[" + current.getData() + "]";
+            current = current.getLink();
+        }
+        return output;
     }
 
     public static void main(String[] args) {
 
+        System.out.println("-Demonstration of Set() class - Andrew Willhoit");
         
+        System.out.println("\n-Set 'set' was created");
         Set set = new Set();
+        
+        //FYI: is_empty() method demo
+        System.out.println("\n-set.is_empty() returns:");
+        System.out.println(set.is_empty());
         
         boolean fileNotOpen = true;
         String input;
@@ -176,249 +188,109 @@ public class Set implements StringSet, Cloneable {
 
                 in = new FileInputStream("src\\program2\\Set.java");
                 fileNotOpen = false;
+                System.out.println("\n-This current file (Set.java) was found...");
             } catch (FileNotFoundException e) {
-                System.out.println("Couldn't open file; Goodbye");
+                System.out.println("-Couldn't open file; Goodbye");
                 System.exit(1);
             } // end catch
         } // end while
         inFile = new Scanner(in);
                 
         while (inFile.hasNext()) {
-           // input = inFile.next().replaceAll("[^a-zA-Z ]", "");
-            inFile.useDelimiter("[\\]\\[\\\\ .&,-?!^/{}_();+*@:\n\"]+");
+           
+            inFile.useDelimiter("[\\]\\[\\\\ .&,-?'!^/{}_();+*@:\n\"]+");
             input = inFile.next();           
             
             if (input.length() > 1) {
                 
-             //   System.out.println(input.trim());
+                // FYI: insert() method demo
                 set.insert(input.trim());
             }
         } // end while
        
         inFile.close();
         
-        set.printSet();
+     
+      
+        // FYI: toString() method demo
+        System.out.println("\n-All words in this file where read in.\n"
+                + "-All punctuation was stripped.\n"
+                + "-Each word was placed into the Set");
+        System.out.println("\n-set.toString() is demonstrated below:");
         System.out.println(set);
         
+        //FYI: is_empty() method demo
+        System.out.println("\n-set.is_empty() now returns:");
+        System.out.println(set.is_empty());
+        
+        // FYI: getCapacity() method demo
+        System.out.println("\n-set.getCapacity() returns:");
         System.out.println(set.getCapacity());
+       
+        // FYI: inventory() method demo - (replaced with a return of "size")
+        System.out.println("\n-inventory() method would return the same as getCapcity()."
+                + "\n-inventory() is now used to return the private int variable size.");
+        System.out.println("-set.inventory() returns:");     
         System.out.println(set.inventory());
         
-        System.out.println(set.size);
         
-        System.out.println(set.getFirstItem());
+        //FYI: contains() method demo 
+        System.out.println("\n-set.contains(\"File\") returns: ");
+        System.out.println(set.contains("File"));
+                
+        //FYI: remove() method demo
+        System.out.println("\n-Removing the word \"File\" from the set");
+        set.remove("File");
+        System.out.println("-The word \"File\" from the set");        
+        System.out.println(set);
+              
+        //FYI: contains() method demo 
+        System.out.println("\n-set.contains(\"File\") returns: ");
+        System.out.println(set.contains("File"));
+        
+        //FYI: getFirstItem() method demo
+        System.out.println("\n-Retrieving and removing the first string in set");
+        System.out.println(set.getFirstItem() + " -has been removed");
         System.out.println(set);
         
-        System.out.println(set.getFirstItem());
-        System.out.println(set);
         
-        System.out.println(set.getRandomItem());
-        System.out.println(set);
-        
-        // this is where I had an "Inception" moment or maybe "Momento", some Christopher Nolan movie anyhow
-        // I was testing the methods after reading in from this file. Then I wanted
-        // to add a word I
-        set.insert("PickleBarrel");
+        //FYI: getRandomItem() method demo
+        System.out.println("\n-Retrieving and removing a random string in set");
+        System.out.println(set.getRandomItem()+ " -has been removed");
         System.out.println(set);
         
         
+        //FYI: getFirstItem() method demo
+        System.out.println("\n-Retrieving and removing the new first string in set");
+        System.out.println(set.getFirstItem() + " -has been removed");
+        System.out.println(set);
         
-//        Set set = new Set();
-//        System.out.println(set.getRandomItem());
-//        System.out.println(set.getFirstItem()); 
-//        System.out.println(set.getLastItem());
-//        
-//        System.out.println("\n Inventory?");
-//        System.out.println(set.inventory() + " strings stored");
-//
-//        System.out.println("\n Capacity?");
-//        System.out.println(set.getCapacity() + "  is the total size of the Set");
-//
-//        System.out.println("\n Is empty?");
-//        System.out.println(set.is_empty());
-//
-//        System.out.println("\n printSet() method:");
-//        set.printSet();
-//
-//        System.out.println("\n ToString method:");
-//        System.out.println(set.toString());
-//
-//        System.out.println("\n Now adding strings:");
-//        set.insert("john");
-//        set.insert("paul");
-//        set.insert("george");
-//        set.insert("ringo");
-//        set.insert("julian");
-//        set.insert("nikolai");
-//        set.insert("albert");
-//        set.insert("fabrizio");
-//        set.insert("paul");
-//        set.insert("julian");
-//
-//        System.out.println("\n Is empty?");
-//        System.out.println(set.is_empty());
-//
-//        System.out.println("\n Inventory?");
-//        System.out.println(set.inventory() + " strings stored");
-//
-//        System.out.println("\n Capacity?");
-//        System.out.println(set.getCapacity() + "  is the total size of the Set");
-//
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//
-////        for (int i = 0; i < 10; i++) {
-////            System.out.println("removed: " + set.getRandomItem() + "\n");
-////            System.out.println(set + "\n");
-////        }
-//        
-//        for (int i = 0; i < 5; i++) {
-//            System.out.println("first: " + set.getFirstItem()+ "\n");
-//            System.out.println(set + "\n");
-//        }
-//
-////        System.out.println("\n firstItem() method: ");
-////        System.out.println( set.getFirstItem());
-////        
-////        
-////        System.out.println("\n ToString method:");
-////        System.out.println(set);
-////        
-////        
-////        String removeName = "john";
-////        System.out.println("\n Removing: " + removeName);
-////        set.remove(removeName);
-////
-////        System.out.println("\n ToString method:");
-////        System.out.println(set);
-////        
-////        System.out.println("\n firstItem() method: ");
-////        System.out.println( set.getFirstItem());
-////
-////        
-//        String removeName2 = "nikolai";
-//        System.out.println("\n Removing: " + removeName2);
-//        set.remove(removeName2);
-//
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        
-//        System.out.println(set.getRandomItem());
-//        
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        
-//        
-//        
-//        System.out.println(set.getRandomItem());
-//        
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        
-//        System.out.println(set.getRandomItem());
-//        
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        System.out.println("\n firstItem() method: ");
-//        System.out.println(set.getFirstItem());
-//
-//        
-//        String removeName3 = "paul";
-//        System.out.println("\n Removing: " + removeName3);
-//        set.remove(removeName3);
-//
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        System.out.println("\n firstItem() method: ");
-//        System.out.println(set.getFirstItem());
-//        
-//        
-//        String containsName = "paul";
-//        System.out.println("\n contains() method: " + containsName + "?");
-//        System.out.println(set.contains(containsName));
-//
-//        System.out.println("\n contains() method: " + removeName + "?");
-//        System.out.println(set.contains(removeName));
-//
-//        System.out.println("\n Inventory?");
-//        System.out.println(set.inventory());
-//
-//        System.out.println("\n Is empty?");
-//        System.out.println(set.is_empty());
-//
-//        System.out.println("\n Capacity?");
-//        System.out.println(set.getCapacity() + "  is the total size of the Set");
+        //FYI: getRandomItem() method demo
+        System.out.println("\n-Retrieving and removing another random string in set");
+        System.out.println(set.getRandomItem()+ " -has been removed");
+        System.out.println(set);        
+        
+        
+        // FYI: getCapacity() method demo
+        System.out.println("\n-set.getCapacity() now returns:");
+        System.out.println(set.getCapacity());
+        
+        
+        System.out.println("\n-Removing 10 random items");
+        for (int i = 0; i < 10; i++) {
+            System.out.println("removed: " + set.getRandomItem());
+        }
+        System.out.println("\n-set.toString():");
+        System.out.println(set);     
+        
+        // FYI: getCapacity() method demo
+        System.out.println("\n-set.getCapacity() now returns:");
+        System.out.println(set.getCapacity());
+        
 
-      //  set.remove("paul");
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//       bonus main testing
-//        
-//        String removeName3 = "john";
-//        System.out.println("\n Removing: " + removeName3);
-//        set.remove(removeName3);
-//                   
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        
-//        String removeName4 = "paul";
-//        System.out.println("\n Removing: " + removeName4);
-//        set.remove(removeName4);
-//                   
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        String removeName5 = "george";
-//        System.out.println("\n Removing: " + removeName5);
-//        set.remove(removeName5);
-//                   
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);        
-//        
-//        String removeName6 = "ringo";
-//        System.out.println("\n Removing: " + removeName6);
-//        set.remove(removeName6);
-//                   
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        
-//        
-//        String removeName7 = "julian";
-//        System.out.println("\n Removing: " + removeName7);
-//        set.remove(removeName7);
-//                   
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        String removeName8 = "albert";
-//        System.out.println("\n Removing: " + removeName8);
-//        set.remove(removeName8);
-//                   
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
-//        
-//        
-//        set.insert("julian");
-//        System.out.println("\n ToString method:");
-//        System.out.println(set);
     } // end main()
 
+    
     private class Node {
 
         private Node link;
