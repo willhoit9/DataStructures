@@ -1,12 +1,6 @@
 package com.lab2;
-/**
- * 
- * @author Pavel Bennett. Thanks to Tess Ghidei from IBM for suggesting a performance improvement.
- * Original code copyright 2005-2011 Virtivia Corporation
- * Used by permission
- */
 
-	public class LinkedListWithNode
+public class LinkedListWithNode
 	{
 		// reference to the head node.
 		private Node head;
@@ -163,8 +157,8 @@ package com.lab2;
 	public static void main(String[] args) {
 		LinkedListWithNode list = new LinkedListWithNode();
 		String data;
-		for (int x=0; x<(int)(Math.random()*10)+ 3; x++){
-			data = ""+Math.random();
+		for (int x=0; x<8; x++){
+			data = ""+x;
 			list.add(data);
 		}
 		System.out.println("Original list:");
@@ -173,8 +167,8 @@ package com.lab2;
 		int index = ((int)(Math.random()*10))%list.size() + 1;
 		System.out.println("Getting item at index " + index);
 		System.out.println(list.get(index)+ " retrieved");
-		System.out.println("Removing item");
-		list.remove(index);
+		System.out.println("Removing item at index 4");
+		list.remove(4);
 		System.out.println("Revised list:");
 		System.out.println(list);
 		System.out.println("Removing first item:");
@@ -185,7 +179,7 @@ package com.lab2;
 		list.remove(list.size());
 		System.out.println("Revised list:");
 		System.out.println(list);
-		index = ((int)(Math.random()*10))%list.size() + 1;
+		index = ((int)(Math.random()*1000))%list.size() + 1;
 		System.out.println("Adding new item at position " + index);
 		list.add(""+Math.random(), index);
 		System.out.println("Revised list:");
