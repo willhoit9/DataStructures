@@ -1,34 +1,35 @@
-//Set Class
-//Andrew Willhoit - 3/12/14
+ //Set Class
 
+//Andrew Willhoit - 3/12/14
+ 
 package program2;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-
+ 
+ 
 public class Set implements StringSet, Cloneable {
-
+ 
     private int size;
     private Node head;
-
+ 
     public Set() {
         head = new Node(null);
         size = 0;
     }
-
-
+ 
+ 
     @Override
     public void resize(int larger) {
 //        throw new UnsupportedOperationException("This method is not supported "
 //                + "due to the nature Link Lists");     
     }
-
+ 
     @Override
     public void insert(String entry) {
         if (!this.contains(entry)) {
-
+ 
             Node temp = new Node(entry);
             Node current = head;
             while (current.getLink() != null) {
@@ -38,20 +39,20 @@ public class Set implements StringSet, Cloneable {
             size++;
         }
     }
-
+ 
     @Override
     public void remove(String target) {
         for (Node c1 = head, c2 = head.getLink(); c2 != null; c1 = c1.getLink(), c2 = c2.getLink()) {
             if (c2.getData().equalsIgnoreCase(target)) {
                 //System.out.println("----TARGET FOUND");
                 //System.out.println("----TARGET? " + c2.getData());
-
+ 
                 c1.setLink(c2.getLink());
                 size--;
             }
         }
     }
-
+ 
     
         @Override
     public String getRandomItem() {
@@ -61,17 +62,17 @@ public class Set implements StringSet, Cloneable {
         
         int random = (int) (Math.random() * inventory() +1);
         //System.out.println("----RANDOM # " + random);
-
+ 
         Node current = head.getLink();
         for (int i = 1; i < random; i++) {
-
+ 
             if (current.getLink() == null) {
                 return null;
             }
-
+ 
             current = current.getLink();
         }
-
+ 
         String removedString = current.getData();
         remove(removedString);
         //System.out.println("---- INVENTORY: " + inventory() );
@@ -83,7 +84,7 @@ public class Set implements StringSet, Cloneable {
        // this method is just for fun. might get back to it...
     }
     
-
+ 
     @Override
     public String getFirstItem() {
         if (is_empty()) {
@@ -95,7 +96,7 @@ public class Set implements StringSet, Cloneable {
         remove(removedString);
         return removedString;
     }
-
+ 
     @Override
     public boolean contains(String target) {
         boolean answer = false;
@@ -103,7 +104,7 @@ public class Set implements StringSet, Cloneable {
         if (head.getLink() == null) {
             return false;
         }
-
+ 
         for (cursor = head; cursor != null; cursor = cursor.getLink()) {
             if (cursor.data != null && cursor.data.equalsIgnoreCase(target)) {
                 answer = true;
@@ -111,12 +112,12 @@ public class Set implements StringSet, Cloneable {
         }
         return answer;
     }
-
+ 
     @Override
     public boolean is_empty() {
         return head.getLink() == null;
     }
-
+ 
     
     @Override
     public int inventory() {
@@ -131,7 +132,7 @@ public class Set implements StringSet, Cloneable {
         }
         return answer;
     }
-
+ 
     @Override 
     public int getCapacity() {
        // Since using a Link List, getCapacity would return the same as inventory()
@@ -151,7 +152,7 @@ public class Set implements StringSet, Cloneable {
             current = current.getLink();
         }
     }
-
+ 
     // toString() displays the Set horizontally 
     @Override
     public String toString() {
@@ -163,9 +164,18 @@ public class Set implements StringSet, Cloneable {
         }
         return output;
     }
-
+ 
+    public Set getClone() {
+        try {
+            return (Set)super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println(e.toString());
+            return null;
+        }       
+    }
+    
     public static void main(String[] args) {
-
+ 
         System.out.println("-Demonstration of Set() class - Andrew Willhoit");
         
         System.out.println("\n-Set 'set' was created");
@@ -182,11 +192,11 @@ public class Set implements StringSet, Cloneable {
                
         while (fileNotOpen){
             try {
-             //   This reads in the current program source code in my Netbeans 
-             //   project. If it it run outside of a project structure, 
-             //   replace with: in = new FileInputStream("src\\program2\\Set.java");
-
+ 
+              // if class is run insided Netbeans program strucutre, use line below:
                 in = new FileInputStream("src\\program2\\Set.java");
+              // if class is run inside BlueJ, use line below:
+              //  in = new FileInputStream("Set.java");
                 fileNotOpen = false;
                 System.out.println("\n-This current file (Set.java) was found...");
             } catch (FileNotFoundException e) {
@@ -235,18 +245,18 @@ public class Set implements StringSet, Cloneable {
         
         
         //FYI: contains() method demo 
-        System.out.println("\n-set.contains(\"File\") returns: ");
-        System.out.println(set.contains("File"));
+        System.out.println("\n-set.contains(\"Andrew\") returns: ");
+        System.out.println(set.contains("Andrew"));
                 
         //FYI: remove() method demo
-        System.out.println("\n-Removing the word \"File\" from the set");
-        set.remove("File");
-        System.out.println("-The word \"File\" from the set");        
+        System.out.println("\n-Removing the word \"Andrew\" from the set");
+        set.remove("Andrew");
+        System.out.println("-The word \"Andrew\" was removed from the set");        
         System.out.println(set);
               
         //FYI: contains() method demo 
-        System.out.println("\n-set.contains(\"File\") returns: ");
-        System.out.println(set.contains("File"));
+        System.out.println("\n-set.contains(\"Andrew\") now returns: ");
+        System.out.println(set.contains("Andrew"));
         
         //FYI: getFirstItem() method demo
         System.out.println("\n-Retrieving and removing the first string in set");
@@ -287,44 +297,66 @@ public class Set implements StringSet, Cloneable {
         System.out.println("\n-set.getCapacity() now returns:");
         System.out.println(set.getCapacity());
         
-
+        
+        System.out.println("\n-Creating new Set: setCopy");
+        Set setCopy = new Set();
+       
+        // FYI: getClone() method demo
+        System.out.println("-copying set into setCopy: set.getClone");
+        setCopy = set.getClone();
+        
+        System.out.println("\nPrinting out setCopy");
+        System.out.println("\n-setCopy.toString():");
+        System.out.println(setCopy);
+ 
+        //FYI: getRandomItem() method demo
+        System.out.println("\n-Retrieving and removing a random string in setCopy");
+        System.out.println(setCopy.getRandomItem()+ " -has been removed");
+        
+        System.out.println("\n-setCopy.toString():");
+        System.out.println(setCopy);  
+        
+        // FYI: getCapacity() method demo
+        System.out.println("\n-setCopy.getCapacity() now returns:");
+        System.out.println(setCopy.getCapacity());
+        
     } // end main()
-
+ 
     
     private class Node {
-
+ 
         private Node link;
         private String data;
-
+ 
         // Node constructor
         public Node(String _data) {
             data = _data;
             link = null;
         }
-
+ 
         // Node constructor for pointing to specific node
         public Node(String _data, Node _link) {
             data = _data;
             link = _link;
         }
-
+ 
         public String getData() {
             return data;
             // get the string from this node
         }
-
+ 
         public void setData(String _data) {
             data = _data;
         }
-
+ 
         public Node getLink() {
             return link;
         }
-
+ 
         public void setLink(Node _link) {
             link = _link;
         }
-
+ 
     } // end of private inner class Node
-
+ 
 } // end class Set

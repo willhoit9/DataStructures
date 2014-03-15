@@ -1,3 +1,5 @@
+// add copy methods to this 
+
 package com.lab2;
 
 public class LinkedListWithNode
@@ -15,6 +17,19 @@ public class LinkedListWithNode
 			listCount = 0;
 		}
 		
+                //added my Andrew - 3.14.14
+                public static LinkedListWithNode listCopy(LinkedListWithNode source)
+                {
+                    if (source == null)
+                        return null;
+                    
+                    LinkedListWithNode copy = new LinkedListWithNode();
+                    
+                    
+                    return copy;
+                }
+                
+                
 		public void add(Object data)
 		// post: appends the specified element to the end of this list.
 		{
