@@ -25,9 +25,13 @@ public class IntNodeTester
             System.out.printf(format+format+format+format, "^", "|", "|", "cursor[]");
         }
     }
+
     
     public static void main (String [] args)
     {
+        
+        
+
         Random rg = new Random();
         IntNode head = new IntNode(rg.nextInt(100), null);
         boolean done = false;
@@ -139,9 +143,15 @@ public class IntNodeTester
                 {
                     System.out.println("head must come before tail!");
                 }
+                
+                
             }
             printList(nodes[0], IntNode.listLength(nodes[0])); 
+           
 
+           
+            
+            
             System.out.print("Run tests again? (y/n): ");
             reply = kb.nextLine();
             if(reply.equalsIgnoreCase("n"))
