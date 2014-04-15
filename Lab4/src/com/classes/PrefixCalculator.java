@@ -1,12 +1,14 @@
 package com.classes;
 
+// Data Structures Lab4 - Due 4/8/14
+// Andrew Willhoit - PrefixCalculator.java - 3/29/14
+// based on Main's PostfixCalculator with modifications
 
 import java.util.*;
-import java.util.regex.*;
 
 public class PrefixCalculator {
     private String expression;
-    private LinkedList reversedExpression = new LinkedList();
+    private LinkedList<String>  reversedExpression = new LinkedList<> ();
     private Stack<Double> nums;
     public static String UNSIGNED_DOUBLE = "((\\d+\\.?\\d*)|(\\.\\d+))([Ee][-+]?\\d+)?.*?";
     public static String CHARACTER = "\\S.*?";
@@ -14,29 +16,21 @@ public class PrefixCalculator {
     
     
     public PrefixCalculator (){
-        nums = new Stack<Double>();
+        nums = new Stack<>();
         expression = "";
     }
     
-    private void reverseExpression() {
-         
-         System.out.println("BEFORE: " + expression);      
-         
-         Scanner scan = new Scanner (this.expression);
-         
+    private void reverseExpression() {        
+         //System.out.println("BEFORE: " + expression);               
+         Scanner scan = new Scanner (this.expression);         
          int i = 0;
          do {            
-             reversedExpression.add(reversedExpression.size() - i, scan.next());             
+             reversedExpression.add(reversedExpression.size() - i,  scan.next());             
              i++;
          } while (scan.hasNext());
          
-         System.out.println("LISTEXP: " + reversedExpression.toString());
+         //System.out.println("LISTEXP: " + reversedExpression.toString());
     }
-    
-    
-    
-    
-
     
     
     
@@ -50,14 +44,12 @@ public class PrefixCalculator {
     public void evalPrefix() {
         
         reverseExpression();
-        Iterator <Object> it = reversedExpression.iterator();
+        Iterator <String> it = reversedExpression.iterator();
         String s;
         
         do {
             s = it.next().toString();
                        
-         //  if (s.matches("(?:\\d*\\.)?\\d+")) {
-         //   if (s.matches("((\\d+\\.?\\d*)|(\\.\\d+))([Ee][-+]?\\d+)?.*?")) {
             if (s.matches(UNSIGNED_DOUBLE)) {
                 nums.push(new Double(s));
             } else if (s.matches(CHARACTER)) {
@@ -65,8 +57,7 @@ public class PrefixCalculator {
             }
                            
         } while (it.hasNext());
-        
-        
+                
     }
     
     // this is very similar to the same PostfixCalculator method,

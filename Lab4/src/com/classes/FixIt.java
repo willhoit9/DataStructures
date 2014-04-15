@@ -2,6 +2,10 @@
 
 package com.classes;
 
+// Data Structures Lab4 - Due 4/8/14
+// Andrew Willhoit - FixIt.java - 3/29/14
+// Includes Main's PostfixCalculator and my PrefixCalculator
+// Infix to Postfix may be added later this week.
 
 import java.util.Scanner;
 
@@ -68,7 +72,7 @@ public class FixIt {
             System.out.println("3) infix - convert a infix expression to postfix, then solve");
             System.out.println("4) quit - skedaddle");
             System.out.print("Enter 1,2,3, or 4: ");
-            reply = scan.nextLine();
+            reply = scan.nextLine().trim();
             
             
             if (reply.equalsIgnoreCase("1")) {
@@ -78,10 +82,10 @@ public class FixIt {
                 fixIt.setInput(preInput);                
                 try {
                     fixIt.doPreFix();
-                    System.out.println("\nThe expression: '" + preInput + "' is a valid postfix expression.");
+                    System.out.println("\nThe expression: '" + preInput + "' is a valid prefix expression.");
                 } catch (IllegalArgumentException e) {
                     goodInput = false;
-                    System.out.println("\nSorry. '" + preInput + "' was not a valid postfix expression.\nPlease Try Again.");                    
+                    System.out.println("\nSorry. '" + preInput + "' was not a valid prefix expression.\nPlease Try Again.");                    
                 }
               
             }else if (reply.equalsIgnoreCase("2")) {
@@ -103,7 +107,7 @@ public class FixIt {
                 System.out.println("You picked: " + reply);
                 
                 System.out.println("This functionality hasn't been implemented yet. Sorry!");
-                
+                goodInput = false;
             }else if (reply.equalsIgnoreCase("4")) {
                 System.out.println("You picked: " + reply);
                 System.exit(0);
@@ -135,7 +139,7 @@ public class FixIt {
             System.out.println("\nHey, we had fun huh?");
             System.out.print("Wanna run again? (y/n): ");
             reply = scan.nextLine();
-            if(reply.equalsIgnoreCase("n"))
+            if(reply.trim().equalsIgnoreCase("n"))
             {
                 done = true;
             } else {

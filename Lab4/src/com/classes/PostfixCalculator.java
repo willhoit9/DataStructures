@@ -1,5 +1,9 @@
 package com.classes;
 
+// Data Structures Lab4 - Due 4/8/14
+// Andrew Willhoit - PostfixCalculator.java - 3/29/14
+// Main's PostfixCalculator , with main method removed.
+
 import java.util.*;
 import java.util.regex.*;
 
@@ -12,7 +16,7 @@ public class PostfixCalculator {
     
     public PostfixCalculator ()
     {
-        nums = new Stack<Double>();
+        nums = new Stack<>();
         expression = "";
     }
 
@@ -67,26 +71,8 @@ public class PostfixCalculator {
     {
         expression = e;
     }
-    
-    public static void main (String [] args)
-    {
-        PostfixCalculator pc = new PostfixCalculator();
-        Scanner kb = new Scanner (System.in);
-        String input;
-        do {
-            System.out.print ("Enter a postfix expression (or Q to quit: ");
-            input = kb.nextLine();
-            if (input.equalsIgnoreCase("q"))
-                System.out.println ("So long, and thanks for all the fish!");
-            else
-            {
-                pc.setExpression(input);
-                pc.evalPostfix();
-                System.out.println ("Your expression evaluates to: " +
-                                        pc.getResult());
-            }
-        } while (!input.equalsIgnoreCase("q"));
-    }
+ 
+    //removed main method
 }
 
             
