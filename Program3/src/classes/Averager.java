@@ -5,6 +5,9 @@ public class Averager
    private int count;  // How many numbers have been given to this averager
    private double sum; // Sum of all the numbers given to this averager                  
    private int totalShowedUp; // the total amount of people that drive by
+   private int leftBecauseLongLine;
+
+
    
    public Averager( )
    {
@@ -33,6 +36,11 @@ public class Averager
    {
       return count;
    }
+
+    public int getTotalShowedUp() {
+        return totalShowedUp;
+    }
+   
    
    // a car shows up to the carwash
    public void showUp()
@@ -43,6 +51,12 @@ public class Averager
    // how many people left because line was too long?
    public int howManyLeft()
    {
-       return totalShowedUp - count;
+       return leftBecauseLongLine;
    }
+   
+   public void leftBecauseLongLine()
+   {
+       leftBecauseLongLine++;
+   }
+   
 }
