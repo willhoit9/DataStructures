@@ -2,6 +2,12 @@
 package classes;
 
 
+//Andrew Willhoit - Data Structures 
+//Queue Simulation - Customer.java
+//
+//4/14/14
+
+
 public class Customer {
     
     private int customerID;

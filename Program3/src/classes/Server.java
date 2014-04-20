@@ -3,6 +3,11 @@ package classes;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+//Andrew Willhoit - Data Structures 
+//Queue Simulation - Server.java
+//Based on Main and Sheller's code
+//4/14/14
+
 public class Server
 {
    private int secondsForService; // Seconds for a single wash

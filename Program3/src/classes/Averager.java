@@ -1,5 +1,10 @@
 package classes;
 
+//Andrew Willhoit - Data Structures 
+//Queue Simulation - Averager.java
+//Based on Main and Sheller's code
+//4/14/14
+
 public class Averager
 {
    private int count;  // How many numbers have been given to this averager

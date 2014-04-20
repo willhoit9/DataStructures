@@ -1,6 +1,13 @@
 
 package classes;
 
+//Andrew Willhoit - Data Structures 
+//Queue Simulation - CarWash.java
+//Based on Main and Sheller's code
+//4/14/14
+
+
+
 import java.util.*;
 
 public class CarWash
@@ -16,18 +23,23 @@ public class CarWash
       int SERVERNUMBER = kb.nextInt();
       System.out.println("Enter how much a server cost to run an hour: ");
       double SERVERHOURLYCOST = kb.nextDouble();
-//      System.out.println("Enter how long server breaks last: ");
-//      int BREAKTIME = kb.nextInt();
-      System.out.println("Enter arrival probability: ");
+      System.out.println("Enter your average arrival probability"
+              + "\nThis will change automatically based on time of day: ");
       double ARRIVALPROB = kb.nextDouble();
+      
+      System.out.println("What's the high range on line length before a customer leaves: ");
+      int MAXLINE = kb.nextInt();
+      System.out.println("What's the lowest line number you've seen a customer leave because: ");
+      int MINLINE = kb.nextInt();
+      
       System.out.println("enter time for simulation: ");
       int TOTALTIME = kb.nextInt();
       
-      carWashSimulate(WASHTIME, WASHCOST, SERVERNUMBER, SERVERHOURLYCOST, ARRIVALPROB, TOTALTIME);
+      carWashSimulate(WASHTIME, WASHCOST, SERVERNUMBER, SERVERHOURLYCOST, ARRIVALPROB, MAXLINE, MINLINE, TOTALTIME);
    }
     
    public static void carWashSimulate
-   (int washTime, double washCost, int serverNumber, double serverHourlycost, double arrivalProb, int totalTime)
+   (int washTime, double washCost, int serverNumber, double serverHourlycost, double arrivalProb,int maxLine, int minLine, int totalTime)
    {
       int custID = 1;
    //   Queue<Integer> arrivalTimes = new LinkedList<Integer>( );  
@@ -63,7 +75,7 @@ public class CarWash
       System.out.println("Total simulation seconds: " + totalTime);
    
       // Check the precondition:
-      if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0 || serverNumber < 1 )
+      if (washTime <= 0 || arrivalProb < 0 || arrivalProb > 1 || totalTime < 0 || serverNumber < 1 || maxLine < 0 || minLine < 0 )
          throw new IllegalArgumentException("Values out of range"); 
 
 
@@ -135,7 +147,8 @@ public class CarWash
             System.out.println("Customer "+ (arrivedCustID)  +" arrived at " + (arrivedCurrentSecond));
             
             waitTimes.showUp(); // someone has shownup, they may get in line or leave...
-            if (arrivalTimes.size() < 6) {
+            int waitTolerance = (int)(Math.random() * (maxLine - minLine)) + minLine;
+            if (arrivalTimes.size() < waitTolerance) {
                 
                 arrivalTimes.add(new Customer(arrivedCustID, arrivedCurrentSecond));         //
                 System.out.println("Customer "+ (arrivedCustID)  +" got in line at " + (arrivedCurrentSecond));
@@ -144,7 +157,7 @@ public class CarWash
            } else {
                 waitTimes.leftBecauseLongLine();
                 System.out.println("Customer "+ (arrivedCustID)  +" left at "
-                        + "" + (arrivedCurrentSecond) + " because the line was longer than " + 6);
+                        + "" + (arrivedCurrentSecond) + " because the line was longer than " + waitTolerance);
                 System.out.println("Line length is currently: " + arrivalTimes.size());
             }
                  
