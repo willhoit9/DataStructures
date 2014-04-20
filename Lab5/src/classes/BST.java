@@ -1,5 +1,7 @@
 package classes;
 
+import com.sun.corba.se.spi.monitoring.MonitoringConstants;
+
 public class BST<E extends Comparable<E>>
 {
     private BTNode<E> root;    
@@ -124,11 +126,101 @@ public class BST<E extends Comparable<E>>
     } //end greaterThan(.) 
     
     
-    public int inBetween(int less, int greater) 
+    public int inBetween(BTNode<E> current, E val1, E val2) 
     {
+        E d1 = current.getData();
+        E lower;
+        E upper;
         
-       return 0; 
+        if ( val1.compareTo(val2) == 0  ) {
+            throw new IllegalArgumentException("That's not a range bro.");
+        }
+        if ( val1.compareTo(val2) < 1  ) {
+            lower = val1;
+            upper = val2;
+        } else {
+            upper = val1;
+            lower = val2;
+        }
+        System.out.println("Lower limit: " + lower);
+        System.out.println("Upper limit: " + upper);
+        System.out.println("current.getData: " + d1);
+        System.out.println("searching for values less than: " + upper + " and greater than: " + lower);
+   
+
+
+        if ( upper.compareTo(d1) > 0  && lower.compareTo(d1) < 0 ) {
+            System.out.println("IN RANGE:");
+            System.out.println("   current.getData " + d1 + " is less than  "+ upper + ".");
+            System.out.println("   current.getData " + d1 + " is greater than  "+ lower + ".");
+            count++;            
+            if (current.getLeft() != null) {
+                System.out.println("@@   " +current.getLeft().getData());              
+                inBetween(current.getLeft(), lower, upper);
+            } 
+            if (current.getRight() !=null) {
+                System.out.println("##   " +current.getRight().getData());
+                inBetween(current.getRight(), lower, upper);
+            }
+            
+        } else {
+         
+            System.out.println("OUT OF RANGE:");
+            if (upper.compareTo(d1) <= 0) {
+                System.out.println("   current.getData " + d1 + " is greater than  "+ upper + ".");
+            }
+            if (lower.compareTo(d1) >= 0) {
+                 System.out.println("   current.getData " + d1 + " is lower than  "+ lower + ".");
+            }
+            
+            
+            if (current.getLeft() != null) {
+                System.out.println("$$   " + current.getLeft().getData());
+                inBetween(current.getLeft(), lower, upper);
+            } 
+            if (current.getRight() !=null) {
+                System.out.println("%%   " +current.getRight().getData());
+                inBetween(current.getRight(), lower, upper);
+            }
+        }
+        
+
+
+       return count; 
     } //end inBetween(..)
+    
+    
+//       public int inBetweenCheat(BTNode<E> current, E val1, E val2) 
+//    {
+//        E d1 = current.getData();
+//        E lower;
+//        E upper;
+//        
+//        if ( val1.compareTo(val2) == 0  ) {
+//            throw new IllegalArgumentException("That's not a range bro.");
+//        }
+//        if ( val1.compareTo(val2) < 1  ) {
+//            lower = val1;
+//            upper = val2;
+//        } else {
+//            upper = val1;
+//            lower = val2;
+//        }
+//        System.out.println("Lower limit: " + lower);
+//        System.out.println("Upper limit: " + upper);
+//        System.out.println("current.getData: " + d1);
+//        System.out.println("searching for values less than: " + upper + " and greater than: " + lower);
+//        
+//        int num1 = lessThan(current, lower);    
+//        this.count = 0;
+//        int num2 = greaterThan(current, upper);
+//        
+//        return num1 - num2;
+//    }
+    
+    
+    
+    
     
     public void print()
     {
@@ -154,26 +246,29 @@ public class BST<E extends Comparable<E>>
        tree.root.postorderPrint();
        System.out.println("\n");
        
+
+
         System.out.println("\nLessThan:");
-       // tree.lessThan(tree.getRoot(), 9); 
-        
-        
-        
         tree.count = 0;
-        int answer = tree.lessThan(tree.getRoot(), 2);
+        int answer = tree.lessThan(tree.getRoot(), 33);
         System.out.println("\nAnswer " +answer);
-        
-        
-        
+
+
+
         tree.count = 0;
-        
-        System.out.println("\nGreaterThan:");
-       // tree.lessThan(tree.getRoot(), 9); 
-        
-        
-        answer = tree.greaterThan(tree.getRoot(), 24);
+
+        System.out.println("\nGreaterThan:"); 
+        answer = tree.greaterThan(tree.getRoot(), 3);
         System.out.println("\nAnswer " + answer);
-        
+
+
+        tree.count = 0;
+
+        System.out.println("\nInBetween:");
+        answer = tree.inBetween(tree.getRoot(), 2 , 34);
+        System.out.println("\nAnswer " + answer);
+
+
         
         
 //        
@@ -192,42 +287,46 @@ public class BST<E extends Comparable<E>>
 //       
 //       
        
-       tree = new BST<Integer>(50);
-       
-       System.out.println("\nBuilding binary search tree with known values");
-       tree.insert(tree.getRoot(),20);
-       tree.insert(tree.getRoot(),14);
-       tree.insert(tree.getRoot(),97);
-       tree.insert(tree.getRoot(),100);
-       tree.insert(tree.getRoot(),2);
-       tree.insert(tree.getRoot(),45);
-       tree.insert(tree.getRoot(),36);
-       tree.insert(tree.getRoot(),44);
-       tree.insert(tree.getRoot(),72);
-       tree.insert(tree.getRoot(),76);
-       tree.print();
-       
-       
-       
-       
-       
-       
-       
-       
-        tree.count = 0;
-        System.out.println("\nLessThan:");
-        answer = tree.lessThan(tree.getRoot(), 73);
-        System.out.println("\nAnswer " + answer);
+//       tree = new BST<Integer>(50);
+//       
+//       System.out.println("\nBuilding binary search tree with known values");
+//       tree.insert(tree.getRoot(),20);
+//       tree.insert(tree.getRoot(),14);
+//       tree.insert(tree.getRoot(),97);
+//       tree.insert(tree.getRoot(),100);
+//       tree.insert(tree.getRoot(),2);
+//       tree.insert(tree.getRoot(),45);
+//       tree.insert(tree.getRoot(),36);
+//       tree.insert(tree.getRoot(),44);
+//       tree.insert(tree.getRoot(),72);
+//       tree.insert(tree.getRoot(),76);
+//       tree.print();
+//       
+//       
+//       
+//       
+//       
+//       
+//       
+//       
+//        tree.count = 0;
+//        System.out.println("\nLessThan:");
+//        answer = tree.lessThan(tree.getRoot(), 73);
+//        System.out.println("\nAnswer " + answer);
+//        
+//        
+//        tree.count = 0;
+//        
+//        System.out.println("\nGreaterThan:");
+//        answer = tree.greaterThan(tree.getRoot(), 51);
+//        System.out.println("\nAnswer " + answer);
+//       
+//       
+//       
+//        tree.inBetween(tree.getRoot(), 100 , 100);
+//        
         
         
-        tree.count = 0;
-        
-        System.out.println("\nGreaterThan:");
-        answer = tree.greaterThan(tree.getRoot(), 51);
-        System.out.println("\nAnswer " + answer);
-       
-       
-       
     }
 }
 
