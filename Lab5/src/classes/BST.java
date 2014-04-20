@@ -43,17 +43,11 @@ public class BST<E extends Comparable<E>>
         System.out.println("current.getData: " + d1);
         System.out.println("searching for values < " + value);
    
-//        if (value.compareTo(d1) == 0) {
-//            int s = (int)BTNode.treeSize(current.getLeft());
-//            return s;
-//        }
+
 
         if ( value.compareTo(d1) <= 0 ) {
-           // System.out.println("value "+ value + " is less than current.getData which is " + d1);
             System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
-            
-           // lessThan(current.getLeft(), value)
-            
+                        
             if (current.getLeft() != null) {
                 System.out.println("@@   " +current.getLeft().getData());
                 lessThan(current.getLeft(), value);
@@ -64,7 +58,7 @@ public class BST<E extends Comparable<E>>
 //            }
             
         } else {
-         //   System.out.println("value "+ value + " is greater than current.getData which is " + d1);
+         
             System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
             count++;
             if (current.getLeft() != null) {
@@ -81,37 +75,7 @@ public class BST<E extends Comparable<E>>
         return count;
     } //end lessThan(.)
     
-//    public int greaterThan(BTNode<E> current, E val) 
-//    {
-//        E d1 = current.getData();
-//        E value = val;
-//        
-//        System.out.println("current.getData: " + d1);
-//        System.out.println("searching for values < " + value);
-//        
-//        
-//        if ( value.compareTo(d1) > 0 ) {
-//           // System.out.println("value "+ value + " is less than current.getData which is " + d1);
-//            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
-//            
-//           // lessThan(current.getLeft(), value)
-//            
-//            if (current.getLeft() != null) {
-//                System.out.println(current.getLeft().getData());
-//                greaterThan(current.getLeft(), value);
-//            } 
-//            if (current.getRight() !=null) {
-//                System.out.println(current.getRight().getData());
-//                greaterThan(current.getRight(), value);
-//            }
-//            
-//        } else {
-//         //   System.out.println("value "+ value + " is greater than current.getData which is " + d1);
-//            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
-//            count++;
-//        }
-//       return count; 
-//    } //end greaterThan(.)  
+
     
     public int greaterThan(BTNode<E> current, E val) 
     {
@@ -120,40 +84,43 @@ public class BST<E extends Comparable<E>>
         E value = val;
         
         System.out.println("current.getData: " + d1);
-        System.out.println("searching for values < " + value);
-        
-        
-        if (value.compareTo(d1) == 0) {
-          //  int size = (int)BTNode.treeSize(current);
-            
-            int s = (int)BTNode.treeSize(current.getRight());
-            
-            return s;
-        }
-        
-        
+        System.out.println("searching for values > " + value);
+   
+//        if (value.compareTo(d1) == 0) {
+//            int s = (int)BTNode.treeSize(current.getLeft());
+//            return s;
+//        }
+
         if ( value.compareTo(d1) < 0 ) {
-           // System.out.println("value "+ value + " is less than current.getData which is " + d1);
-            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
+           
             count++;
-           // lessThan(current.getLeft(), value)
+            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
             
+           
             if (current.getRight() !=null) {
-                System.out.println(current.getRight().getData());
+                System.out.println("##   " +current.getRight().getData());
                 greaterThan(current.getRight(), value);
             }
             if (current.getLeft() != null) {
-                System.out.println(current.getLeft().getData());
+                System.out.println("@@   " +current.getLeft().getData());
                 greaterThan(current.getLeft(), value);
             } 
-
+ 
             
         } else {
-         //   System.out.println("value "+ value + " is greater than current.getData which is " + d1);
-            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
-            
+            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
+
+            if (current.getRight() !=null) {
+                System.out.println("%%   " +current.getRight().getData());
+                greaterThan(current.getRight(), value);
+            }
+//            if (current.getLeft() != null) {
+//                System.out.println("$$   " + current.getLeft().getData());
+//                greaterThan(current.getLeft(), value);
+//            } 
         }
-       return count; 
+        
+        return this.count;
     } //end greaterThan(.) 
     
     
@@ -191,7 +158,9 @@ public class BST<E extends Comparable<E>>
        // tree.lessThan(tree.getRoot(), 9); 
         
         
-        int answer = tree.lessThan(tree.getRoot(), 17);
+        
+        tree.count = 0;
+        int answer = tree.lessThan(tree.getRoot(), 2);
         System.out.println("\nAnswer " +answer);
         
         
@@ -202,7 +171,7 @@ public class BST<E extends Comparable<E>>
        // tree.lessThan(tree.getRoot(), 9); 
         
         
-        answer = tree.greaterThan(tree.getRoot(), 18);
+        answer = tree.greaterThan(tree.getRoot(), 24);
         System.out.println("\nAnswer " + answer);
         
         
@@ -225,7 +194,7 @@ public class BST<E extends Comparable<E>>
        
        tree = new BST<Integer>(50);
        
-       System.out.println("Building binary search tree with known values");
+       System.out.println("\nBuilding binary search tree with known values");
        tree.insert(tree.getRoot(),20);
        tree.insert(tree.getRoot(),14);
        tree.insert(tree.getRoot(),97);
@@ -251,13 +220,22 @@ public class BST<E extends Comparable<E>>
         System.out.println("\nAnswer " + answer);
         
         
-//        tree.count = 0;
-//        
-//        System.out.println("\nGreaterThan:");
-//        answer = tree.greaterThan(tree.getRoot(), 50);
-//        System.out.println("\nAnswer " + answer);
-//       
-//       
+        tree.count = 0;
+        
+        System.out.println("\nGreaterThan:");
+        answer = tree.greaterThan(tree.getRoot(), 51);
+        System.out.println("\nAnswer " + answer);
+       
+       
        
     }
 }
+
+
+
+
+
+//        if (value.compareTo(d1) == 0) {
+//            int s = (int)BTNode.treeSize(current.getLeft());
+//            return s;
+//        }
