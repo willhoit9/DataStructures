@@ -4,10 +4,12 @@ package classes;
 //Lab 5- BST.java  -  4/23/14
 //Based on Main and Sheller's code
 //adds: 
-//    lessThan(BTNode<E> current,  E val)
-//    greaterThan(BTNode<E> current,  E val)
-//    inBetween(BTNode<E> current, E val1, E val2)
-//    lessThan(BTNode<E> current,  E val)
+//    lessThan(BTNode<E> current,  E val) - a helper method that does counting
+//    lessThanRecur(BTNode<E> current,  E val) - does the real work
+//    greaterThan(BTNode<E> current,  E val) - a helper method that does counting
+//    greaterThanRecur(BTNode<E> current,  E val) - does the real work
+//    inBetween(BTNode<E> current, E val1, E val2)  - a helper method that does counting
+//    inBetweenRecur(BTNode<E> current,  E val) - does the real work
 // methods
 //
 //adds:
@@ -25,7 +27,7 @@ import java.util.Arrays;
 public class BST<E extends Comparable<E>>
 {
     private BTNode<E> root;    
-    int count = 0;
+    private int count = 0;
     
     public BST(E data)
     {
@@ -93,7 +95,26 @@ public class BST<E extends Comparable<E>>
         }
     }  
     
+    
+    
+    // This "helper", public method was added to assist with counting.
+    // The method below this one (now called lessThanRecur) was the original.
+    // The count is keep outside of the methods, so it had to be reset before
+    // everytime the lessThan or greaterThan methods were called. This is
+    // awkward to do from the main method.
+    // adding this (lessThan) method takes care of that for you.
+    // It resets the count variable to 0. It calls the method that does the counting
+    // It then resets the count variable back to 0 and returns the number of values found
     public int lessThan(BTNode<E> current,  E val) 
+    {
+        this.count = 0;
+        int numberLessThan = lessThanRecur(current, val);
+        this.count = 0;
+        return numberLessThan;
+    }
+    
+    
+    private int lessThanRecur(BTNode<E> current,  E val) 
     {
       //  int count = 0;
         E d1 = current.getData();
@@ -102,18 +123,16 @@ public class BST<E extends Comparable<E>>
 //        System.out.println("current.getData: " + d1);
 //        System.out.println("searching for values < " + value);
    
-
-
         if ( value.compareTo(d1) <= 0 ) {
 //            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
                         
             if (current.getLeft() != null) {
 //                System.out.println("@@   " +current.getLeft().getData());
-                lessThan(current.getLeft(), value);
+                lessThanRecur(current.getLeft(), value);
             } 
 //            if (current.getRight() !=null) {
 //                System.out.println("##   " +current.getRight().getData());
-//                lessThan(current.getRight(), value);
+//                lessThanRecur(current.getRight(), value);
 //            }
             
         } else {
@@ -122,20 +141,28 @@ public class BST<E extends Comparable<E>>
             count++;
             if (current.getLeft() != null) {
 //                System.out.println("$$   " + current.getLeft().getData());
-                lessThan(current.getLeft(), value);
+                lessThanRecur(current.getLeft(), value);
             } 
             if (current.getRight() !=null) {
 //                System.out.println("%%   " +current.getRight().getData());
-                lessThan(current.getRight(), value);
+                lessThanRecur(current.getRight(), value);
             }
         }
 
         return count;
-    } //end lessThan(.)
+    } //end lessThanRecur(.)
     
 
+    public int greaterThan(BTNode<E> current,  E val) 
+    {
+        this.count = 0;
+        int numberGreaterThan = greaterThanRecur(current, val);
+        this.count = 0;
+        return numberGreaterThan;
+    }
     
-    public int greaterThan(BTNode<E> current, E val) 
+    
+    private int greaterThanRecur(BTNode<E> current, E val) 
     {
         
         E d1 = current.getData();
@@ -157,11 +184,11 @@ public class BST<E extends Comparable<E>>
            
             if (current.getRight() !=null) {
 //                System.out.println("##   " +current.getRight().getData());
-                greaterThan(current.getRight(), value);
+                greaterThanRecur(current.getRight(), value);
             }
             if (current.getLeft() != null) {
 //                System.out.println("@@   " +current.getLeft().getData());
-                greaterThan(current.getLeft(), value);
+                greaterThanRecur(current.getLeft(), value);
             } 
  
             
@@ -170,19 +197,29 @@ public class BST<E extends Comparable<E>>
 
             if (current.getRight() !=null) {
 //                System.out.println("%%   " +current.getRight().getData());
-                greaterThan(current.getRight(), value);
+                greaterThanRecur(current.getRight(), value);
             }
 //            if (current.getLeft() != null) {
 //                System.out.println("$$   " + current.getLeft().getData());
-//                greaterThan(current.getLeft(), value);
+//                greaterThanRecur(current.getLeft(), value);
 //            } 
         }
         
         return this.count;
-    } //end greaterThan(.) 
+    } //end greaterThanRecur(.) 
     
     
-    public int inBetween(BTNode<E> current, E val1, E val2) 
+    
+    public int inBetween(BTNode<E> current,  E val1, E val2) 
+    {
+        this.count = 0;
+        int numberinBetween = inBetweenRecur(current, val1, val2);
+        this.count = 0;
+        return numberinBetween;
+    }
+    
+    
+    private int inBetweenRecur(BTNode<E> current, E val1, E val2) 
     {
         E d1 = current.getData();
         E lower;
@@ -212,11 +249,11 @@ public class BST<E extends Comparable<E>>
             count++;            
             if (current.getLeft() != null) {
 //                System.out.println("@@   " +current.getLeft().getData());              
-                inBetween(current.getLeft(), lower, upper);
+                inBetweenRecur(current.getLeft(), lower, upper);
             } 
             if (current.getRight() !=null) {
 //                System.out.println("##   " +current.getRight().getData());
-                inBetween(current.getRight(), lower, upper);
+                inBetweenRecur(current.getRight(), lower, upper);
             }
             
         } else {
@@ -232,15 +269,15 @@ public class BST<E extends Comparable<E>>
             
             if (current.getLeft() != null) {
 //                System.out.println("$$   " + current.getLeft().getData());
-                inBetween(current.getLeft(), lower, upper);
+                inBetweenRecur(current.getLeft(), lower, upper);
             } 
             if (current.getRight() !=null) {
 //                System.out.println("%%   " +current.getRight().getData());
-                inBetween(current.getRight(), lower, upper);
+                inBetweenRecur(current.getRight(), lower, upper);
             }
         }
        return count; 
-    } //end inBetween(..)
+    } //end inBetweenRecur(..)
        
     public void print()
     {
@@ -263,26 +300,41 @@ public class BST<E extends Comparable<E>>
         tree.print();
 
         System.out.println("\nTesting methods on tree with known values:");
+//        System.out.println("\nLessThan: 33");
+//        tree.count = 0;
+//        int answer = tree.lessThanRecur(tree.getRoot(), 33);
+//        System.out.println("Answer: " + answer);
+
+        
         System.out.println("\nLessThan: 33");
-        tree.count = 0;
         int answer = tree.lessThan(tree.getRoot(), 33);
         System.out.println("Answer: " + answer);
+        
 
-
-        tree.count = 0;
-
-        System.out.println("\nGreaterThan:"); 
+//        tree.count = 0;
+//
+//        System.out.println("\nGreaterThan:"); 
+//        answer = tree.greaterThanRecur(tree.getRoot(), 3);
+//        System.out.println("Answer " + answer);
+        
+        
+        System.out.println("\nGreaterThan: 3"); 
         answer = tree.greaterThan(tree.getRoot(), 3);
-        System.out.println("\nAnswer " + answer);
+        System.out.println("Answer " + answer);
+        
+        
 
 
-        tree.count = 0;
+//        tree.count = 0;
+//
+//        System.out.println("\nInBetween:");
+//        answer = tree.inBetweenRecur(tree.getRoot(), 2 , 34);
+//        System.out.println("Answer " + answer);
 
-        System.out.println("\nInBetween:");
+
+        System.out.println("\nInBetween: 2 and 34");
         answer = tree.inBetween(tree.getRoot(), 2 , 34);
-        System.out.println("\nAnswer " + answer);
-
-
+        System.out.println("Answer " + answer);
         
         
 //        
@@ -325,19 +377,19 @@ public class BST<E extends Comparable<E>>
 //       
 //        tree.count = 0;
 //        System.out.println("\nLessThan:");
-//        answer = tree.lessThan(tree.getRoot(), 73);
+//        answer = tree.lessThanRecur(tree.getRoot(), 73);
 //        System.out.println("\nAnswer " + answer);
 //        
 //        
 //        tree.count = 0;
 //        
 //        System.out.println("\nGreaterThan:");
-//        answer = tree.greaterThan(tree.getRoot(), 51);
+//        answer = tree.greaterThanRecur(tree.getRoot(), 51);
 //        System.out.println("\nAnswer " + answer);
 //       
 //       
 //       
-//        tree.inBetween(tree.getRoot(), 100 , 100);
+//        tree.inBetweenRecur(tree.getRoot(), 100 , 100);
 //        
         
         
