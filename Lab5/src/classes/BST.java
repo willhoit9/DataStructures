@@ -1,6 +1,9 @@
 package classes;
 
-import com.sun.corba.se.spi.monitoring.MonitoringConstants;
+//import com.sun.corba.se.spi.monitoring.MonitoringConstants;
+
+import java.util.Arrays;
+
 
 public class BST<E extends Comparable<E>>
 {
@@ -11,6 +14,8 @@ public class BST<E extends Comparable<E>>
     {
         root = new BTNode(data, null, null);
     }
+    
+
     
     public BTNode<E> getRoot()
     {
@@ -72,8 +77,7 @@ public class BST<E extends Comparable<E>>
                 lessThan(current.getRight(), value);
             }
         }
-        
-        
+
         return count;
     } //end lessThan(.)
     
@@ -183,48 +187,56 @@ public class BST<E extends Comparable<E>>
                 inBetween(current.getRight(), lower, upper);
             }
         }
-        
-
-
        return count; 
     } //end inBetween(..)
-    
-    
-//       public int inBetweenCheat(BTNode<E> current, E val1, E val2) 
-//    {
-//        E d1 = current.getData();
-//        E lower;
-//        E upper;
-//        
-//        if ( val1.compareTo(val2) == 0  ) {
-//            throw new IllegalArgumentException("That's not a range bro.");
-//        }
-//        if ( val1.compareTo(val2) < 1  ) {
-//            lower = val1;
-//            upper = val2;
-//        } else {
-//            upper = val1;
-//            lower = val2;
-//        }
-//        System.out.println("Lower limit: " + lower);
-//        System.out.println("Upper limit: " + upper);
-//        System.out.println("current.getData: " + d1);
-//        System.out.println("searching for values less than: " + upper + " and greater than: " + lower);
-//        
-//        int num1 = lessThan(current, lower);    
-//        this.count = 0;
-//        int num2 = greaterThan(current, upper);
-//        
-//        return num1 - num2;
-//    }
-    
-    
-    
-    
-    
+       
     public void print()
     {
         root.print(0);
+    }
+    
+    
+    
+
+    
+    
+    public BST(E[] array)
+    {
+        E[] ar = array;
+        Arrays.sort(ar);
+        
+        System.out.println(ar.getClass());
+        
+        System.out.println("\nSorted:\n"); 
+        for (Object object : ar) {
+            System.out.println(object.toString());
+        }
+        
+        root = new BTNode(ar[ar.length/2 ], null, null);
+        
+        builder(ar);
+
+    }
+    
+    public void builder(E[] ar) 
+    {
+        System.out.println("ENTERING BUILDER");
+        E[] arrayLeft = Arrays.copyOfRange(ar, 0, ar.length/2);
+        E[] arrayRight = Arrays.copyOfRange(ar, (ar.length/2) + 1, ar.length);
+        
+        if (arrayLeft.length > 0)
+        {
+            System.out.println(arrayLeft[arrayLeft.length/2]);
+            insert(root, (arrayLeft[arrayLeft.length/2]));
+            builder(arrayLeft);
+        }
+        if (arrayRight.length > 0)
+        {
+            System.out.println(arrayRight[arrayRight.length/2]);
+            insert(root, (arrayRight[arrayRight.length/2]));
+            builder(arrayRight);
+        }
+
     }
     
     public static void main (String [] args)
@@ -325,6 +337,63 @@ public class BST<E extends Comparable<E>>
 //       
 //        tree.inBetween(tree.getRoot(), 100 , 100);
 //        
+        
+        
+      //  <E> [] objArr = new <E>[12];
+//        Integer[] data = new Integer[10];
+//        data[0] = new Integer(3);
+//        data[1] = new Integer(5);
+//        data[2] = new Integer(42);
+//        data[3] = new Integer(87);
+//        data[4] = new Integer(16);
+//        data[5] = new Integer(25);
+//        data[6] = new Integer(99);
+//        data[7] = new Integer(1);
+//        data[8] = new Integer(66);
+//        data[9] = new Integer(55);
+
+        Integer[] data = new Integer[17];
+        data[0] = new Integer(1);
+        data[1] = new Integer(2);
+        data[2] = new Integer(3);
+        data[3] = new Integer(4);
+        data[4] = new Integer(5);
+        data[5] = new Integer(6);
+        data[6] = new Integer(7);
+        data[7] = new Integer(8);
+        data[8] = new Integer(9);
+        data[9] = new Integer(10);
+        data[10] = new Integer(11);
+        data[11] = new Integer(12);
+        data[12] = new Integer(13);
+        data[13] = new Integer(14);
+        data[14] = new Integer(15);
+        data[15] = new Integer(16);
+        data[16] = new Integer(17);
+        
+        
+        System.out.println("\nArray stuff");
+        int [] arrayInts = new int [12];  
+        System.out.println(data.length);
+        System.out.println(data[0]);
+        System.out.println(data[1]);
+        
+        for (Integer integer : data) {
+            System.out.println(integer.toString());
+       }
+        
+
+//       Arrays.sort(data);
+        
+//       for (Integer integer : data) {
+//            System.out.println(integer.toString());
+//       }
+       BST<Integer> treeFromArray = new BST<Integer>(data);
+
+       System.out.println("\nPrinting Tree Built From Array:\n");
+       treeFromArray.print();
+       
+      //  System.out.println(data[1].compareTo(data[0]));
         
         
     }
