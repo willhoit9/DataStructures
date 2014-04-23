@@ -40,10 +40,10 @@ public class BST<E extends Comparable<E>>
         E[] ar = array;
         Arrays.sort(ar);
 
-        System.out.println("\nSorted:\n"); 
-        for (Object object : ar) {
-            System.out.println(object.toString());
-        }
+//        System.out.println("\nSorted:\n"); 
+//        for (Object object : ar) {
+//            System.out.println(object.toString());
+//        }
         
         root = new BTNode(ar[ar.length/2 ], null, null);        
         builder(ar);
@@ -53,19 +53,19 @@ public class BST<E extends Comparable<E>>
     // and splits it agian, ad nauseam... er recursively 
     private void builder(E[] array) 
     {
-        System.out.println("ENTERING BUILDER");
+        //System.out.println("ENTERING BUILDER");
         E[] arrayLeft = Arrays.copyOfRange(array, 0, array.length/2);
         E[] arrayRight = Arrays.copyOfRange(array, (array.length/2) + 1, array.length);
         
         if (arrayLeft.length > 0)
         {
-            System.out.println(arrayLeft[arrayLeft.length/2]);
+            //System.out.println(arrayLeft[arrayLeft.length/2]);
             insert(root, (arrayLeft[arrayLeft.length/2]));
             builder(arrayLeft);
         }
         if (arrayRight.length > 0)
         {
-            System.out.println(arrayRight[arrayRight.length/2]);
+           //System.out.println(arrayRight[arrayRight.length/2]);
             insert(root, (arrayRight[arrayRight.length/2]));
             builder(arrayRight);
         }
@@ -113,42 +113,23 @@ public class BST<E extends Comparable<E>>
         return numberLessThan;
     }
     
-    
     private int lessThanRecur(BTNode<E> current,  E val) 
     {
-      //  int count = 0;
         E d1 = current.getData();
         E value = val;
-        
-//        System.out.println("current.getData: " + d1);
-//        System.out.println("searching for values < " + value);
-   
         if ( value.compareTo(d1) <= 0 ) {
-//            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
-                        
             if (current.getLeft() != null) {
-//                System.out.println("@@   " +current.getLeft().getData());
                 lessThanRecur(current.getLeft(), value);
             } 
-//            if (current.getRight() !=null) {
-//                System.out.println("##   " +current.getRight().getData());
-//                lessThanRecur(current.getRight(), value);
-//            }
-            
         } else {
-         
-//            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
             count++;
             if (current.getLeft() != null) {
-//                System.out.println("$$   " + current.getLeft().getData());
                 lessThanRecur(current.getLeft(), value);
             } 
             if (current.getRight() !=null) {
-//                System.out.println("%%   " +current.getRight().getData());
                 lessThanRecur(current.getRight(), value);
             }
         }
-
         return count;
     } //end lessThanRecur(.)
     
@@ -163,51 +144,25 @@ public class BST<E extends Comparable<E>>
     
     
     private int greaterThanRecur(BTNode<E> current, E val) 
-    {
-        
+    {       
         E d1 = current.getData();
         E value = val;
         
-//        System.out.println("current.getData: " + d1);
-//        System.out.println("searching for values > " + value);
-   
-//        if (value.compareTo(d1) == 0) {
-//            int s = (int)BTNode.treeSize(current.getLeft());
-//            return s;
-//        }
-
-        if ( value.compareTo(d1) < 0 ) {
-           
+        if ( value.compareTo(d1) < 0 ) {         
             count++;
-//            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
-            
-           
             if (current.getRight() !=null) {
-//                System.out.println("##   " +current.getRight().getData());
                 greaterThanRecur(current.getRight(), value);
             }
             if (current.getLeft() != null) {
-//                System.out.println("@@   " +current.getLeft().getData());
                 greaterThanRecur(current.getLeft(), value);
             } 
- 
-            
         } else {
-//            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
-
             if (current.getRight() !=null) {
-//                System.out.println("%%   " +current.getRight().getData());
                 greaterThanRecur(current.getRight(), value);
             }
-//            if (current.getLeft() != null) {
-//                System.out.println("$$   " + current.getLeft().getData());
-//                greaterThanRecur(current.getLeft(), value);
-//            } 
         }
-        
         return this.count;
     } //end greaterThanRecur(.) 
-    
     
     
     public int inBetween(BTNode<E> current,  E val1, E val2) 
@@ -217,8 +172,7 @@ public class BST<E extends Comparable<E>>
         this.count = 0;
         return numberinBetween;
     }
-    
-    
+        
     private int inBetweenRecur(BTNode<E> current, E val1, E val2) 
     {
         E d1 = current.getData();
@@ -235,44 +189,25 @@ public class BST<E extends Comparable<E>>
             upper = val1;
             lower = val2;
         }
-//        System.out.println("Lower limit: " + lower);
-//        System.out.println("Upper limit: " + upper);
-//        System.out.println("current.getData: " + d1);
-//        System.out.println("searching for values less than: " + upper + " and greater than: " + lower);
-   
-
 
         if ( upper.compareTo(d1) > 0  && lower.compareTo(d1) < 0 ) {
-//            System.out.println("IN RANGE:");
-//            System.out.println("   current.getData " + d1 + " is less than  "+ upper + ".");
-//            System.out.println("   current.getData " + d1 + " is greater than  "+ lower + ".");
+
             count++;            
-            if (current.getLeft() != null) {
-//                System.out.println("@@   " +current.getLeft().getData());              
+            if (current.getLeft() != null) {            
                 inBetweenRecur(current.getLeft(), lower, upper);
             } 
             if (current.getRight() !=null) {
-//                System.out.println("##   " +current.getRight().getData());
                 inBetweenRecur(current.getRight(), lower, upper);
             }
-            
-        } else {
-         
-//            System.out.println("OUT OF RANGE:");
+        } else {  
             if (upper.compareTo(d1) <= 0) {
-//                System.out.println("   current.getData " + d1 + " is greater than  "+ upper + ".");
             }
             if (lower.compareTo(d1) >= 0) {
-//                 System.out.println("   current.getData " + d1 + " is lower than  "+ lower + ".");
             }
-            
-            
             if (current.getLeft() != null) {
-//                System.out.println("$$   " + current.getLeft().getData());
                 inBetweenRecur(current.getLeft(), lower, upper);
             } 
             if (current.getRight() !=null) {
-//                System.out.println("%%   " +current.getRight().getData());
                 inBetweenRecur(current.getRight(), lower, upper);
             }
         }
@@ -300,163 +235,106 @@ public class BST<E extends Comparable<E>>
         tree.print();
 
         System.out.println("\nTesting methods on tree with known values:");
-//        System.out.println("\nLessThan: 33");
-//        tree.count = 0;
-//        int answer = tree.lessThanRecur(tree.getRoot(), 33);
-//        System.out.println("Answer: " + answer);
-
         
         System.out.println("\nLessThan: 33");
         int answer = tree.lessThan(tree.getRoot(), 33);
         System.out.println("Answer: " + answer);
         
-
-//        tree.count = 0;
-//
-//        System.out.println("\nGreaterThan:"); 
-//        answer = tree.greaterThanRecur(tree.getRoot(), 3);
-//        System.out.println("Answer " + answer);
-        
-        
-        System.out.println("\nGreaterThan: 3"); 
-        answer = tree.greaterThan(tree.getRoot(), 3);
+        System.out.println("\nGreaterThan: 5"); 
+        answer = tree.greaterThan(tree.getRoot(), 5);
         System.out.println("Answer " + answer);
-        
-        
-
-
-//        tree.count = 0;
-//
-//        System.out.println("\nInBetween:");
-//        answer = tree.inBetweenRecur(tree.getRoot(), 2 , 34);
-//        System.out.println("Answer " + answer);
-
-
+               
         System.out.println("\nInBetween: 2 and 34");
         answer = tree.inBetween(tree.getRoot(), 2 , 34);
         System.out.println("Answer " + answer);
         
-        
-//        
-//        
-//        
-//       System.out.println("\n\nBuilding binary search tree with random values");
-//       tree = new BST<Integer>((int)(Math.random()*50));
-//       for (int x=0; x<14; x++)
-//            tree.insert(tree.getRoot(),(int)(Math.random()*50));
-//       tree.print();
-//       
-//       
-//       
-//       
-//       
-//       
-//       
+            
+       System.out.println("\n\nBuilding binary search tree with random values");
+       tree = new BST<Integer>((int)(Math.random()*50));
+       for (int x=0; x<14; x++)
+            tree.insert(tree.getRoot(),(int)(Math.random()*50));
+       tree.print();
+
        
-//       tree = new BST<Integer>(50);
-//       
-//       System.out.println("\nBuilding binary search tree with known values");
-//       tree.insert(tree.getRoot(),20);
-//       tree.insert(tree.getRoot(),14);
-//       tree.insert(tree.getRoot(),97);
-//       tree.insert(tree.getRoot(),100);
-//       tree.insert(tree.getRoot(),2);
-//       tree.insert(tree.getRoot(),45);
-//       tree.insert(tree.getRoot(),36);
-//       tree.insert(tree.getRoot(),44);
-//       tree.insert(tree.getRoot(),72);
-//       tree.insert(tree.getRoot(),76);
-//       tree.print();
-//       
-//       
-//       
-//       
-//       
-//       
-//       
-//       
-//        tree.count = 0;
-//        System.out.println("\nLessThan:");
-//        answer = tree.lessThanRecur(tree.getRoot(), 73);
-//        System.out.println("\nAnswer " + answer);
-//        
-//        
-//        tree.count = 0;
-//        
-//        System.out.println("\nGreaterThan:");
-//        answer = tree.greaterThanRecur(tree.getRoot(), 51);
-//        System.out.println("\nAnswer " + answer);
-//       
-//       
-//       
-//        tree.inBetweenRecur(tree.getRoot(), 100 , 100);
-//        
-        
-        
+        System.out.println("\nTesting methods on tree with random values:");
+
+        // test how many numbers are less than...
+        int random = (int)(Math.random()*50);
+        System.out.println("\nLessThan: " + random);
+        answer = tree.lessThan(tree.getRoot(), random);
+        System.out.println("Answer: " + answer);
+
+        // test how many numbers are greater than...
+        random = (int)(Math.random()*50);
+        System.out.println("\nGreaterThan: " + random); 
+        answer = tree.greaterThan(tree.getRoot(), random);
+        System.out.println("Answer " + answer);
+
+        // test how many numbers are in between...
+        //(the inBetween methods have built in logic to pick which is the higher value
+        // in the range. Exception will be thrown if both values are the same. So I'll catch that here.
+        random = (int)(Math.random()*50);
+        int random2 = (int)(Math.random()*50);
+
+        System.out.println("\nInBetween: " + random + " and " + random2);
+
+        try {
+            answer = tree.inBetween(tree.getRoot(), random , random2);
+            System.out.println("Answer " + answer);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        System.out.println("\n\nTesting Building an array from known values:");
 
         Integer[] data = new Integer[15];
-        data[0] = new Integer(3);
-        data[1] = new Integer(5);
-        data[2] = new Integer(42);
-        data[3] = new Integer(87);
-        data[4] = new Integer(16);
-        data[5] = new Integer(25);
-        data[6] = new Integer(99);
-        data[7] = new Integer(1);
-        data[8] = new Integer(66);
-        data[9] = new Integer(55);
-        data[10] = new Integer(11);
-        data[11] = new Integer(12);
-        data[12] = new Integer(13);
-        data[13] = new Integer(14);
-        data[14] = new Integer(15);
+        
+        for (int i = 0; i < 15; i++) {
+           data[i] = new Integer(i+1);
+        }
 
-//        Integer[] data = new Integer[15];
-//        data[0] = new Integer(1);
-//        data[1] = new Integer(2);
-//        data[2] = new Integer(3);
-//        data[3] = new Integer(4);
-//        data[4] = new Integer(5);
-//        data[5] = new Integer(6);
-//        data[6] = new Integer(7);
-//        data[7] = new Integer(8);
-//        data[8] = new Integer(9);
-//        data[9] = new Integer(10);
-//        data[10] = new Integer(11);
-//        data[11] = new Integer(12);
-//        data[12] = new Integer(13);
-//        data[13] = new Integer(14);
-//        data[14] = new Integer(15);
-//        data[15] = new Integer(16);
-//        data[16] = new Integer(17);
+
+        System.out.println("\nPrinting out the known value array:");
+        System.out.println(Arrays.toString(data));
+
+        //creating a BST from the array
+        BST<Integer> treeFromArray = new BST<>(data);
+
+        System.out.println("\nPrinting Tree Built From Array:\n");
+        treeFromArray.print();
+
         
         
-        System.out.println("\nArray stuff");
-        int [] arrayInts = new int [12];  
+        System.out.println("\n\nTesting Building an array from random values:");
 
-        System.out.println(data[0]);
-        System.out.println(data[1]);
+        int length = ((int)(Math.random()*25)) + 10;
+        System.out.println("Printing out array of random length of "+ length +" containing random values");
+        Integer[] data2 = new Integer[length];
+        for (int i = 0; i < length; i++) {
+           data2[i] = new Integer((int)(Math.random()*50));
+                   
+        }
+        System.out.println("\nPrinting out the random value array:");
+        System.out.println(Arrays.toString(data2));
         
-        for (Integer integer : data) {
-            System.out.println(integer.toString());
-       }
         
+        //creating a BST from the random value array
+        BST<Integer> treeFromArray2 = new BST<>(data2);
 
-       BST<Integer> treeFromArray = new BST<>(data);
-
-       System.out.println("\nPrinting Tree Built From Array:\n");
-       treeFromArray.print();
-       
-
+        System.out.println("\nPrinting Tree Built From Array:\n");
+        treeFromArray2.print();
+        
+        
+        
+        
+        System.out.println("Printing out the random value array sorted:  (for reference)");
+        
+        Arrays.sort(data2);
+        System.out.println(Arrays.toString(data2));
         
     }
 }
 
 
 
-
-
-//        if (value.compareTo(d1) == 0) {
-//            int s = (int)BTNode.treeSize(current.getLeft());
-//            return s;
-//        }
