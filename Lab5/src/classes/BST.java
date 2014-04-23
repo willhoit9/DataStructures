@@ -249,14 +249,16 @@ public class BST<E extends Comparable<E>>
         System.out.println("Answer " + answer);
         
             
-       System.out.println("\n\nBuilding binary search tree with random values");
-       tree = new BST<Integer>((int)(Math.random()*50));
+        System.out.println("\n------------------------------------------------------------");
+        
+       System.out.println("\n\nBuilding binary search tree with random values:");
+       tree = new BST<>((int)(Math.random()*50));
        for (int x=0; x<14; x++)
             tree.insert(tree.getRoot(),(int)(Math.random()*50));
        tree.print();
 
        
-        System.out.println("\nTesting methods on tree with random values:");
+        System.out.println("\nTesting methods on tree with random values and random search values:");
 
         // test how many numbers are less than...
         int random = (int)(Math.random()*50);
@@ -285,6 +287,10 @@ public class BST<E extends Comparable<E>>
             System.out.println(e.getMessage());
         }
 
+        System.out.println("\n------------------------------------------------------------");
+        
+        
+        
 
         System.out.println("\n\nTesting Building an array from known values:");
 
@@ -301,15 +307,16 @@ public class BST<E extends Comparable<E>>
         //creating a BST from the array
         BST<Integer> treeFromArray = new BST<>(data);
 
-        System.out.println("\nPrinting Tree Built From Array:\n");
+        System.out.println("\nPrinting Tree Built From Array of known values:\n");
         treeFromArray.print();
 
+        System.out.println("\n------------------------------------------------------------");
         
         
         System.out.println("\n\nTesting Building an array from random values:");
 
         int length = ((int)(Math.random()*25)) + 10;
-        System.out.println("Printing out array of random length of "+ length +" containing random values");
+        System.out.println("Printing out array of random length of "+ length +", containing random values");
         Integer[] data2 = new Integer[length];
         for (int i = 0; i < length; i++) {
            data2[i] = new Integer((int)(Math.random()*50));
