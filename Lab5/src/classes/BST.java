@@ -1,9 +1,26 @@
 package classes;
 
-//import com.sun.corba.se.spi.monitoring.MonitoringConstants;
+//Andrew Willhoit - Data Structures 
+//Lab 5- BST.java  -  4/23/14
+//Based on Main and Sheller's code
+//adds: 
+//    lessThan(BTNode<E> current,  E val)
+//    greaterThan(BTNode<E> current,  E val)
+//    inBetween(BTNode<E> current, E val1, E val2)
+//    lessThan(BTNode<E> current,  E val)
+// methods
+//
+//adds:
+//   BST(E[] array)
+//constructor
+//
+//adds:
+//   builder(E[] array)
+//method
+
+
 
 import java.util.Arrays;
-
 
 public class BST<E extends Comparable<E>>
 {
@@ -15,7 +32,42 @@ public class BST<E extends Comparable<E>>
         root = new BTNode(data, null, null);
     }
     
+    // constructor to build a BST from an array of comparables
+    public BST(E[] array)
+    {
+        E[] ar = array;
+        Arrays.sort(ar);
 
+        System.out.println("\nSorted:\n"); 
+        for (Object object : ar) {
+            System.out.println(object.toString());
+        }
+        
+        root = new BTNode(ar[ar.length/2 ], null, null);        
+        builder(ar);
+    }
+    
+    // takes in an array, splits it, inserts the middle into the tree, 
+    // and splits it agian, ad nauseam... er recursively 
+    private void builder(E[] array) 
+    {
+        System.out.println("ENTERING BUILDER");
+        E[] arrayLeft = Arrays.copyOfRange(array, 0, array.length/2);
+        E[] arrayRight = Arrays.copyOfRange(array, (array.length/2) + 1, array.length);
+        
+        if (arrayLeft.length > 0)
+        {
+            System.out.println(arrayLeft[arrayLeft.length/2]);
+            insert(root, (arrayLeft[arrayLeft.length/2]));
+            builder(arrayLeft);
+        }
+        if (arrayRight.length > 0)
+        {
+            System.out.println(arrayRight[arrayRight.length/2]);
+            insert(root, (arrayRight[arrayRight.length/2]));
+            builder(arrayRight);
+        }
+    }
     
     public BTNode<E> getRoot()
     {
@@ -47,16 +99,16 @@ public class BST<E extends Comparable<E>>
         E d1 = current.getData();
         E value = val;
         
-        System.out.println("current.getData: " + d1);
-        System.out.println("searching for values < " + value);
+//        System.out.println("current.getData: " + d1);
+//        System.out.println("searching for values < " + value);
    
 
 
         if ( value.compareTo(d1) <= 0 ) {
-            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
+//            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
                         
             if (current.getLeft() != null) {
-                System.out.println("@@   " +current.getLeft().getData());
+//                System.out.println("@@   " +current.getLeft().getData());
                 lessThan(current.getLeft(), value);
             } 
 //            if (current.getRight() !=null) {
@@ -66,14 +118,14 @@ public class BST<E extends Comparable<E>>
             
         } else {
          
-            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
+//            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
             count++;
             if (current.getLeft() != null) {
-                System.out.println("$$   " + current.getLeft().getData());
+//                System.out.println("$$   " + current.getLeft().getData());
                 lessThan(current.getLeft(), value);
             } 
             if (current.getRight() !=null) {
-                System.out.println("%%   " +current.getRight().getData());
+//                System.out.println("%%   " +current.getRight().getData());
                 lessThan(current.getRight(), value);
             }
         }
@@ -89,8 +141,8 @@ public class BST<E extends Comparable<E>>
         E d1 = current.getData();
         E value = val;
         
-        System.out.println("current.getData: " + d1);
-        System.out.println("searching for values > " + value);
+//        System.out.println("current.getData: " + d1);
+//        System.out.println("searching for values > " + value);
    
 //        if (value.compareTo(d1) == 0) {
 //            int s = (int)BTNode.treeSize(current.getLeft());
@@ -100,24 +152,24 @@ public class BST<E extends Comparable<E>>
         if ( value.compareTo(d1) < 0 ) {
            
             count++;
-            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
+//            System.out.println("current.getData " + d1 + " is greater than  "+ value + ".");
             
            
             if (current.getRight() !=null) {
-                System.out.println("##   " +current.getRight().getData());
+//                System.out.println("##   " +current.getRight().getData());
                 greaterThan(current.getRight(), value);
             }
             if (current.getLeft() != null) {
-                System.out.println("@@   " +current.getLeft().getData());
+//                System.out.println("@@   " +current.getLeft().getData());
                 greaterThan(current.getLeft(), value);
             } 
  
             
         } else {
-            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
+//            System.out.println("current.getData " + d1 + " is less than  "+ value + ".");
 
             if (current.getRight() !=null) {
-                System.out.println("%%   " +current.getRight().getData());
+//                System.out.println("%%   " +current.getRight().getData());
                 greaterThan(current.getRight(), value);
             }
 //            if (current.getLeft() != null) {
@@ -146,44 +198,44 @@ public class BST<E extends Comparable<E>>
             upper = val1;
             lower = val2;
         }
-        System.out.println("Lower limit: " + lower);
-        System.out.println("Upper limit: " + upper);
-        System.out.println("current.getData: " + d1);
-        System.out.println("searching for values less than: " + upper + " and greater than: " + lower);
+//        System.out.println("Lower limit: " + lower);
+//        System.out.println("Upper limit: " + upper);
+//        System.out.println("current.getData: " + d1);
+//        System.out.println("searching for values less than: " + upper + " and greater than: " + lower);
    
 
 
         if ( upper.compareTo(d1) > 0  && lower.compareTo(d1) < 0 ) {
-            System.out.println("IN RANGE:");
-            System.out.println("   current.getData " + d1 + " is less than  "+ upper + ".");
-            System.out.println("   current.getData " + d1 + " is greater than  "+ lower + ".");
+//            System.out.println("IN RANGE:");
+//            System.out.println("   current.getData " + d1 + " is less than  "+ upper + ".");
+//            System.out.println("   current.getData " + d1 + " is greater than  "+ lower + ".");
             count++;            
             if (current.getLeft() != null) {
-                System.out.println("@@   " +current.getLeft().getData());              
+//                System.out.println("@@   " +current.getLeft().getData());              
                 inBetween(current.getLeft(), lower, upper);
             } 
             if (current.getRight() !=null) {
-                System.out.println("##   " +current.getRight().getData());
+//                System.out.println("##   " +current.getRight().getData());
                 inBetween(current.getRight(), lower, upper);
             }
             
         } else {
          
-            System.out.println("OUT OF RANGE:");
+//            System.out.println("OUT OF RANGE:");
             if (upper.compareTo(d1) <= 0) {
-                System.out.println("   current.getData " + d1 + " is greater than  "+ upper + ".");
+//                System.out.println("   current.getData " + d1 + " is greater than  "+ upper + ".");
             }
             if (lower.compareTo(d1) >= 0) {
-                 System.out.println("   current.getData " + d1 + " is lower than  "+ lower + ".");
+//                 System.out.println("   current.getData " + d1 + " is lower than  "+ lower + ".");
             }
             
             
             if (current.getLeft() != null) {
-                System.out.println("$$   " + current.getLeft().getData());
+//                System.out.println("$$   " + current.getLeft().getData());
                 inBetween(current.getLeft(), lower, upper);
             } 
             if (current.getRight() !=null) {
-                System.out.println("%%   " +current.getRight().getData());
+//                System.out.println("%%   " +current.getRight().getData());
                 inBetween(current.getRight(), lower, upper);
             }
         }
@@ -196,75 +248,25 @@ public class BST<E extends Comparable<E>>
     }
     
     
-    
-
-    
-    
-    public BST(E[] array)
-    {
-        E[] ar = array;
-        Arrays.sort(ar);
-        
-        System.out.println(ar.getClass());
-        
-        System.out.println("\nSorted:\n"); 
-        for (Object object : ar) {
-            System.out.println(object.toString());
-        }
-        
-        root = new BTNode(ar[ar.length/2 ], null, null);
-        
-        builder(ar);
-
-    }
-    
-    public void builder(E[] ar) 
-    {
-        System.out.println("ENTERING BUILDER");
-        E[] arrayLeft = Arrays.copyOfRange(ar, 0, ar.length/2);
-        E[] arrayRight = Arrays.copyOfRange(ar, (ar.length/2) + 1, ar.length);
-        
-        if (arrayLeft.length > 0)
-        {
-            System.out.println(arrayLeft[arrayLeft.length/2]);
-            insert(root, (arrayLeft[arrayLeft.length/2]));
-            builder(arrayLeft);
-        }
-        if (arrayRight.length > 0)
-        {
-            System.out.println(arrayRight[arrayRight.length/2]);
-            insert(root, (arrayRight[arrayRight.length/2]));
-            builder(arrayRight);
-        }
-
-    }
-    
     public static void main (String [] args)
    {
-       BST<Integer> tree = new BST<Integer>(17);
-       
-       System.out.println("Building binary search tree with known values");
-       tree.insert(tree.getRoot(), 2);
-       tree.insert(tree.getRoot(),34);
-       tree.insert(tree.getRoot(),5);
-       tree.insert(tree.getRoot(),55);
-       tree.insert(tree.getRoot(),15);
-       tree.insert(tree.getRoot(),25);
-       tree.insert(tree.getRoot(),9);
-       tree.print();
-       
-       
-       System.out.println("\n PostOrderPrint");
-       tree.root.postorderPrint();
-       System.out.println("\n");
-       
+        BST<Integer> tree = new BST<>(17);
 
+        System.out.println("Building binary search tree with known values");
+        tree.insert(tree.getRoot(), 2);
+        tree.insert(tree.getRoot(),34);
+        tree.insert(tree.getRoot(),5);
+        tree.insert(tree.getRoot(),55);
+        tree.insert(tree.getRoot(),15);
+        tree.insert(tree.getRoot(),25);
+        tree.insert(tree.getRoot(),9);
+        tree.print();
 
-        System.out.println("\nLessThan:");
+        System.out.println("\nTesting methods on tree with known values:");
+        System.out.println("\nLessThan: 33");
         tree.count = 0;
         int answer = tree.lessThan(tree.getRoot(), 33);
-        System.out.println("\nAnswer " +answer);
-
+        System.out.println("Answer: " + answer);
 
 
         tree.count = 0;
@@ -339,42 +341,47 @@ public class BST<E extends Comparable<E>>
 //        
         
         
-      //  <E> [] objArr = new <E>[12];
-//        Integer[] data = new Integer[10];
-//        data[0] = new Integer(3);
-//        data[1] = new Integer(5);
-//        data[2] = new Integer(42);
-//        data[3] = new Integer(87);
-//        data[4] = new Integer(16);
-//        data[5] = new Integer(25);
-//        data[6] = new Integer(99);
-//        data[7] = new Integer(1);
-//        data[8] = new Integer(66);
-//        data[9] = new Integer(55);
 
-        Integer[] data = new Integer[17];
-        data[0] = new Integer(1);
-        data[1] = new Integer(2);
-        data[2] = new Integer(3);
-        data[3] = new Integer(4);
-        data[4] = new Integer(5);
-        data[5] = new Integer(6);
-        data[6] = new Integer(7);
-        data[7] = new Integer(8);
-        data[8] = new Integer(9);
-        data[9] = new Integer(10);
+        Integer[] data = new Integer[15];
+        data[0] = new Integer(3);
+        data[1] = new Integer(5);
+        data[2] = new Integer(42);
+        data[3] = new Integer(87);
+        data[4] = new Integer(16);
+        data[5] = new Integer(25);
+        data[6] = new Integer(99);
+        data[7] = new Integer(1);
+        data[8] = new Integer(66);
+        data[9] = new Integer(55);
         data[10] = new Integer(11);
         data[11] = new Integer(12);
         data[12] = new Integer(13);
         data[13] = new Integer(14);
         data[14] = new Integer(15);
-        data[15] = new Integer(16);
-        data[16] = new Integer(17);
+
+//        Integer[] data = new Integer[15];
+//        data[0] = new Integer(1);
+//        data[1] = new Integer(2);
+//        data[2] = new Integer(3);
+//        data[3] = new Integer(4);
+//        data[4] = new Integer(5);
+//        data[5] = new Integer(6);
+//        data[6] = new Integer(7);
+//        data[7] = new Integer(8);
+//        data[8] = new Integer(9);
+//        data[9] = new Integer(10);
+//        data[10] = new Integer(11);
+//        data[11] = new Integer(12);
+//        data[12] = new Integer(13);
+//        data[13] = new Integer(14);
+//        data[14] = new Integer(15);
+//        data[15] = new Integer(16);
+//        data[16] = new Integer(17);
         
         
         System.out.println("\nArray stuff");
         int [] arrayInts = new int [12];  
-        System.out.println(data.length);
+
         System.out.println(data[0]);
         System.out.println(data[1]);
         
@@ -383,18 +390,12 @@ public class BST<E extends Comparable<E>>
        }
         
 
-//       Arrays.sort(data);
-        
-//       for (Integer integer : data) {
-//            System.out.println(integer.toString());
-//       }
-       BST<Integer> treeFromArray = new BST<Integer>(data);
+       BST<Integer> treeFromArray = new BST<>(data);
 
        System.out.println("\nPrinting Tree Built From Array:\n");
        treeFromArray.print();
        
-      //  System.out.println(data[1].compareTo(data[0]));
-        
+
         
     }
 }
