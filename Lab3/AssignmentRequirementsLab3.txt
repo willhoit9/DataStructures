@@ -1,0 +1,26 @@
+CSC153 Lab 3, Spring 2014
+Part 1:
+ 
+The two implementations of LinkedLists that we studied contain much of the same functionality, but with a few differences.  In the Node class there are static methods for copying all or part of linked list; no such methods exist in the LinkedListWithNode class.  For part 1, implement list copying methods in LinkedListWithNode that provide this functionality; note that it may be possible to do this by implementing just one new method.  To test your code, modify the IntNodeTester class to test LinkedListWithNode methods instead of IntNode methods - you should be able to display similar results even though you are calling somewhat different methods.
+ 
+Part 2:
+ 
+Implement the following methods and add them to either the LinkedLIstWithNode class or the IntNode class.
+ 
+reverseCopy: creates and returns a copy of the list with the nodes in reverse order from the original
+ 
+losedupes:removes all but one instance of any data value in a list; so, if the original list was:
+ 
+[3 ]->[5 ]->[3 ]->[4 ]->[3 ]->[3 ]->[7 ]->[5 ]->[6 ]->[4 ]
+ 
+the result list would be:
+ 
+[3 ]->[5 ]->[4 ]->[7 ]->[6 ]
+ 
+Code for LinkedListWithNodes: here
+
+Code for IntNode: here
+
+Code for IntNodeTester: here
+
+Turn in: modified versions of LinkedListWithNodes and IntNodeTester; just the two extra methods for IntNode (if you choose to do part 2 with IntNode).

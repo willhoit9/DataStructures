@@ -1,0 +1,17 @@
+CSC 153 Lab 5
+Add methods to the <BST class> that perform the following functions:
+
+Find the number of nodes that contain values less than a specified value
+Find the number of nodes that contain values greater than a specified value
+Find the number of nodes that contain values between two specified values
+For the methods above, the value specified should not have to be present in the tree.
+
+You will also need: <BTNode class>
+
+Add a method that constructs a BST from an array of Comparables. The method should sort the data in the array (using any sorting algorithm you wish), then build the tree in the most balanced manner possible:
+
+the root node should contain the middle value of the sorted array
+children of root should be the middle values of either side of the array
+their children should be middle values from either side of the previous middles
+and so forth ...
+Add a main method to demonstrate your methods.

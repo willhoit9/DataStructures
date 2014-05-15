@@ -1,0 +1,41 @@
+Program 3
+
+Modify the set of classes (Carwash, Averager, ClientGenerator, and Server) that constitute the simulation
+program discussed in class so that it creates a richer simulation environment. You may stick with the
+original carwash scenario or create a scenario of your own choosing.
+Required elements include:
+
+1. Modify the main( ) and simulate( ) methods so that your program can simulate multiple servers.
+In simulate( ), create a queue of servers sized to accommodate the specified number of servers and 
+fill the queue with servers
+
+When a client appears, the front of the server queue should be checked (using the peek( ) method). 
+If the server at the front is not busy, dequeue it, start it serving the client at the front of the client
+queue, then enqueue it on the back of the server queue. Each iteration of the loop will now mean
+that each server on the server queue will have to process one second.
+
+2. Modify the Averager so that counts and reports the number of customers who leave because the line
+is too long.
+
+3. Add code that records the price of a wash, then determine and reports how much gross profit was
+made (from the number of cars washed) and lost (from the number that left).
+
+4. Modify the Server class so that there is a cost associated with each Server – for a human Server, this
+might be an hourly wage, while for a machine this could be hourly (or daily, etc.) cost of operation.
+Subtract the gross cost from the gross profit for your simulation to show the net profit or loss at the
+end of the simulation.
+
+5. Add the ability for a Server to take breaks / go out of service for a set period of time. This will
+involve modifications to both the Server class and the simulate method.
+
+
+Extra credit options (5 points each)
+
+• Modify the program so that each Server has its own initial value for secondsForService rather than
+using the same value for every server; then change the Server queue into a priority queue based on
+placing the best Servers at the front of the queue when not busy.
+• Add a disaster generator (similar to the ClientGenerator) that randomly smites the car wash with a
+temporary shutdown. If a disaster strikes, the customer queue will have to be emptied and all of the
+customers issued refunds; be sure to factor this into the day’s profit or loss.
+• Add code that changes the probability of client arrival based on time of day (can be determined
+from time stamp

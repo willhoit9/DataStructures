@@ -1,0 +1,18 @@
+Lab 4 (10 points)
+
+Write a program that uses stacks to evaluate valid prefix and postfix arithmetic expressions. Use
+either the Java API Stack class or one of the textbook implementations. An algorithm to
+evaluate postfix expression is given in your notes and in the book; you will have to devise your
+own prefix algorithm. The program should:
+-  present the user with each option (prefix or postfix)
+-  prompt for an expression of the chosen type
+-  verify that the expression is properly formed
+-  present the solution
+-  give the user the opportunity to quit or start over
+
+Extra credit options:
+5 points: implement the algorithm found in the book and in the notes to convert an infix
+expression to postfix, then evaluate the expression (this option should then be included in the
+initial menu presented to the user)
+5 points (each): Before presenting the solution, show the pre- or post-fix expression in infix
+form, parenthesized as necessary.

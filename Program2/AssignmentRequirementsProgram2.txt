@@ -1,0 +1,11 @@
+Program 2
+
+Create a Set class that implements the Set interface (link below) and the Cloneable interface. Use either an array or a linked list as the underlying data structure - no API container classes allowed!
+ 
+StringSet interface // in same folder s this
+ 
+The difference between a Set and a Bag is that Set entries must be unique; therefore a slightly different set of public methods is specified.
+ 
+Add a main method (in the Set class or in a separate class) that fully exercises the methods of Set.  One way to do this effectively is to read Strings from a file into a Set (your program source code is a useful file for this purpose), then performs various operations (find, remove, etc.) on the Set.
+ 
+Turn in your source code (paste into Angel or upload as a text file)

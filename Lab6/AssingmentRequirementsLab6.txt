@@ -1,0 +1,7 @@
+DS Lab 6 : Btrees
+Write and test methods for removing values from a B-tree that is used to implement a Set ADT containing integer values.  The program available here supplies code that allows insertion and search within such a B-tree; you may use any or all of the other specified methods to implement the required methods:
+
+public remove method (for Set)
+private methods:
+loose_remove()
+fix_shortage() (may involve several helper methods)
